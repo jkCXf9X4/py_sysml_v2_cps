@@ -1,19 +1,32 @@
-# ssp-airplane-sysml
+# py-sysml-v2-cps
 
-Standalone SysML utilities extracted from the `ssp_airplane` repository.
+Standalone python SysML V" utilities for working with cps architecture
 
 ## Install
 
 From the repository root:
 
 ```bash
-pip install -e ./sysml
+pip install -e .
 ```
 
-Or from a cloned standalone module repo later:
+Or as a regular package install:
 
 ```bash
 pip install .
+```
+
+Install directly from GitHub (no separate manual build step):
+
+```bash
+pip install "git+https://github.com/jkCXf9X4/py_sysml_v2_cps.git"
+```
+
+Pin to a branch or tag:
+
+```bash
+pip install "git+https://github.com/jkCXf9X4/py_sysml_v2_cps.git@main"
+pip install "git+https://github.com/jkCXf9X4/py_sysml_v2_cps.git@v0.1.0"
 ```
 
 ## Development
@@ -21,7 +34,13 @@ pip install .
 Run package-local tests:
 
 ```bash
-pytest -q sysml/tests
+pytest -q
+```
+
+Build distributable artifacts:
+
+```bash
+python -m build
 ```
 
 ## Provided API
@@ -42,4 +61,4 @@ pytest -q sysml/tests
 - `docs/` - package-specific notes
 
 Package tests use `tests/fixtures/aircraft_subset/`, a compact subset extracted
-from the main project architecture so validation is self-contained.
+from the original project architecture so validation is self-contained.

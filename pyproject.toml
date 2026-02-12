@@ -3,14 +3,14 @@ requires = ["setuptools>=69", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ssp-airplane-sysml"
+name = "py-sysml-v2-cps"
 version = "0.1.0"
-description = "Standalone SysML parsing and helper utilities extracted from ssp_airplane."
+description = "Standalone SysML parsing and helper utilities for cps development."
 readme = "README.md"
 requires-python = ">=3.10"
-license = "MIT"
+license = { file = "LICENSE" }
 authors = [
-  { name = "ssp_airplane contributors" }
+  { name = "Erik Rosenlund" }
 ]
 classifiers = [
   "Development Status :: 3 - Alpha",
@@ -25,7 +25,6 @@ dependencies = []
 
 [tool.setuptools]
 package-dir = {"" = "src"}
-include-package-data = true
 
 [tool.setuptools.packages.find]
 where = ["src"]
