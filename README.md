@@ -1,6 +1,10 @@
 # py-sysml-v2-cps
 
-Standalone python SysML V" utilities for working with cps architecture
+Standalone Python SysML v2 parsing and helper utilities for CPS development.
+
+## Requirements
+
+- Python 3.10 or newer
 
 ## Install
 
@@ -29,12 +33,23 @@ pip install "git+https://github.com/jkCXf9X4/py_sysml_v2_cps.git@main"
 pip install "git+https://github.com/jkCXf9X4/py_sysml_v2_cps.git@v0.1.0"
 ```
 
+## Quickstart
+
+```python
+from sysml import parse_literal, parse_sysml_folder
+
+architecture = parse_sysml_folder("path/to/sysml_folder")
+print(architecture.package)
+print(sorted(architecture.parts))
+
+```
+
 ## Development
 
 Run package-local tests:
 
 ```bash
-pytest -q
+python -m pytest -q
 ```
 
 Build distributable artifacts:
@@ -45,13 +60,10 @@ python -m build
 
 ## Provided API
 
-- `sysml.parse_sysml_folder`
-- `sysml.SysMLFolderParser`
-- `sysml.load_architecture`
-- `sysml.component_modelica_map`
-- `sysml.parse_literal`
-- `sysml.normalize_primitive`
-- `sysml.infer_primitive`
+- Architecture parsing: `sysml.parse_sysml_folder`, `sysml.SysMLFolderParser`, `sysml.load_architecture`, `sysml.component_modelica_map`
+- Literal/value helpers: `sysml.parse_literal`, `sysml.normalize_primitive`, `sysml.infer_primitive`, `sysml.optional_primitive`, `sysml.primitive_from_value`, `sysml.modelica_connector_type`
+
+- Data structures: `sysml.SysMLArchitecture`, `sysml.SysMLPartDefinition`, `sysml.SysMLPortDefinition`, `sysml.SysMLPortEndpoint`, `sysml.SysMLPartReference`, `sysml.SysMLRequirement`, `sysml.SysMLConnection`, `sysml.SysMLAttribute`
 
 ## Package layout
 
