@@ -97,3 +97,28 @@ def test_subparts_are_linked_to_part_definitions():
 
     assert by_name["environment"].target_def is not None
     assert by_name["environment"].target_def.name == "Environment"
+
+
+def test_connections_are_linked_to_part_and_port_definitions():
+    architecture = load_architecture(FIXTURE_ARCH_DIR)
+
+    first = architecture.connections[0]
+    assert first.src_component == "AutopilotModule"
+    assert first.src_port == "autopilotCmd"
+    assert first.dst_component == "MissionComputer"
+    assert first.dst_port == "autopilotInput"
+
+    assert first.src_part_def is not None
+    assert first.src_part_def.name == "AutopilotModule"
+    assert first.dst_part_def is not None
+    assert first.dst_part_def.name == "MissionComputer"
+
+    assert first.src_port_def is not None
+    assert first.src_port_def.name == "autopilotCmd"
+    assert first.src_port_def.payload_def is not None
+    assert first.src_port_def.payload_def.name == "PilotCommand"
+
+    assert first.dst_port_def is not None
+    assert first.dst_port_def.name == "autopilotInput"
+    assert first.dst_port_def.payload_def is not None
+    assert first.dst_port_def.payload_def.name == "PilotCommand"

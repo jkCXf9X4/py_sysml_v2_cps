@@ -116,6 +116,10 @@ class SysMLConnection:
     src_port: str
     dst_component: str
     dst_port: str
+    src_part_def: Optional["SysMLPartDefinition"] = None
+    dst_part_def: Optional["SysMLPartDefinition"] = None
+    src_port_def: Optional["SysMLPortReference"] = None
+    dst_port_def: Optional["SysMLPortReference"] = None
 
     def __str__(self) -> str:
         return _json_dumps(self)
@@ -186,6 +190,7 @@ class SysMLFolderParser:
 
         _attach_port_definitions(parts, port_defs)
         _attach_part_definitions(parts)
+        _attach_connection_definitions(parts, connections)
         return SysMLArchitecture(
             package=package_name or "Package",
             parts=parts,
@@ -392,6 +397,31 @@ def _attach_part_definitions(parts: Dict[str, SysMLPartDefinition]) -> None:
     for part in parts.values():
         for subpart in part.parts:
             subpart.target_def = parts.get(subpart.target)
+
+
+def _attach_connection_definitions(
+    parts: Dict[str, SysMLPartDefinition], connections: List[SysMLConnection]
+) -> None:
+    for connection in connections:
+        connection.src_part_def = parts.get(connection.src_component)
+        connection.dst_part_def = parts.get(connection.dst_component)
+        connection.src_port_def = _find_port_reference(
+            connection.src_part_def, connection.src_port
+        )
+        connection.dst_port_def = _find_port_reference(
+            connection.dst_part_def, connection.dst_port
+        )
+
+
+def _find_port_reference(
+    part: Optional[SysMLPartDefinition], port_name: str
+) -> Optional[SysMLPortReference]:
+    if part is None:
+        return None
+    for port in part.ports:
+        if port.name == port_name:
+            return port
+    return None
 
 
 def _iter_block_items(block: str) -> Iterator[Tuple[str, str]]:
