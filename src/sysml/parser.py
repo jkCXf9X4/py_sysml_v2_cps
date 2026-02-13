@@ -25,19 +25,6 @@ from pathlib import Path
 import re
 from typing import Dict, Iterable, Iterator, List, Optional, Sequence, Tuple
 
-__all__ = [
-    "SysMLAttribute",
-    "SysMLPortEndpoint",
-    "SysMLPartReference",
-    "SysMLPartDefinition",
-    "SysMLPortDefinition",
-    "SysMLRequirement",
-    "SysMLConnection",
-    "SysMLArchitecture",
-    "SysMLFolderParser",
-    "parse_sysml_folder",
-]
-
 
 def _to_jsonable(value):
     if is_dataclass(value):
@@ -95,7 +82,7 @@ class SysMLPortEndpoint:
     direction: str  # "in" or "out"
     payload: str
     doc: Optional[str] = None
-    payload_def: Optional["SysMLPortDefinition"] = None
+    payload_def: Optional[SysMLPortDefinition] = None
 
     def __str__(self) -> str:
         return _json_dumps(self)
@@ -156,6 +143,7 @@ class SysMLFolderParser:
 
     def __init__(self, folder: Path | str):
         self.folder = Path(folder)
+
         if not self.folder.is_dir():
             raise FileNotFoundError(f"SysML folder not found: {self.folder}")
 
@@ -205,9 +193,14 @@ class SysMLFolderParser:
         )
 
 
-def parse_sysml_folder(folder: Path | str) -> SysMLArchitecture:
-    """Convenience helper mirroring `SysMLFolderParser(folder).parse()`."""
-    return SysMLFolderParser(folder).parse()
+def load_architecture(folder: Path | str) -> SysMLArchitecture:
+    """
+    """
+    path = folder
+    if path.is_file():
+        path = path.parent
+
+    return SysMLFolderParser(path).parse()
 
 
 # ---------------------------------------------------------------------------

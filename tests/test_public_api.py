@@ -3,10 +3,8 @@ from dataclasses import fields, is_dataclass
 from pathlib import Path
 
 from sysml import (
-    component_modelica_map,
     load_architecture,
     parse_literal,
-    parse_sysml_folder,
 )
 
 
@@ -37,7 +35,7 @@ def test_literal_parser_handles_primitives():
 
 
 def test_architecture_loader_from_fixture_directory():
-    architecture = parse_sysml_folder(FIXTURE_ARCH_DIR)
+    architecture = load_architecture(FIXTURE_ARCH_DIR)
     assert architecture.package == "Aircraft"
     assert set(architecture.parts) == {"AutopilotModule", "MissionComputer", "Environment"}
     assert set(architecture.port_definitions) == {
@@ -63,7 +61,7 @@ def test_architecture_loader_from_fixture_file():
 
 
 def test_ports_are_linked_to_payload_definitions():
-    architecture = parse_sysml_folder(FIXTURE_ARCH_DIR)
+    architecture = load_architecture(FIXTURE_ARCH_DIR)
     autopilot = architecture.part("AutopilotModule")
     by_name = {port.name: port for port in autopilot.ports}
     assert by_name["autopilotCmd"].payload == "PilotCommand"
@@ -74,14 +72,8 @@ def test_ports_are_linked_to_payload_definitions():
 
 
 def test_extracted_attribute_literals_are_parseable():
-    architecture = parse_sysml_folder(FIXTURE_ARCH_DIR)
+    architecture = load_architecture(FIXTURE_ARCH_DIR)
     waypoint_attr = architecture.part("AutopilotModule").attributes["waypointX_km"]
     assert parse_literal(waypoint_attr.value) == [0.0, 10.0, 20.0]
     assert parse_literal(architecture.part("AutopilotModule").attributes["waypointCount"].value) == 10
 
-
-def test_component_modelica_map_uses_package_name():
-    architecture = parse_sysml_folder(FIXTURE_ARCH_DIR)
-    model_map = component_modelica_map(architecture)
-    assert model_map["AutopilotModule"] == "Aircraft.AutopilotModule"
-    assert model_map["MissionComputer"] == "Aircraft.MissionComputer"

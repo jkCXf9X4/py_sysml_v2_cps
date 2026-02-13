@@ -58,13 +58,6 @@ Build distributable artifacts:
 python -m build
 ```
 
-## Provided API
-
-- Architecture parsing: `sysml.parse_sysml_folder`, `sysml.SysMLFolderParser`, `sysml.load_architecture`, `sysml.component_modelica_map`
-- Literal/value helpers: `sysml.parse_literal`, `sysml.normalize_primitive`, `sysml.infer_primitive`, `sysml.optional_primitive`, `sysml.primitive_from_value`, `sysml.modelica_connector_type`
-
-- Data structures: `sysml.SysMLArchitecture`, `sysml.SysMLPartDefinition`, `sysml.SysMLPortDefinition`, `sysml.SysMLPortEndpoint`, `sysml.SysMLPartReference`, `sysml.SysMLRequirement`, `sysml.SysMLConnection`, `sysml.SysMLAttribute`
-
 ## Package layout
 
 - `src/sysml/` - package implementation
