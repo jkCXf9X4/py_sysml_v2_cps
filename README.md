@@ -35,14 +35,7 @@ pip install "git+https://github.com/jkCXf9X4/py_sysml_v2_cps.git@v0.1.0"
 
 ## Quickstart
 
-```python
-from sysml import parse_literal, parse_sysml_folder
-
-architecture = parse_sysml_folder("path/to/sysml_folder")
-print(architecture.package)
-print(sorted(architecture.parts))
-
-```
+[Example](examples/parse_architecture.py)
 
 ## Development
 
