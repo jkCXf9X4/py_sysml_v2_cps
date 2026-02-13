@@ -10,7 +10,7 @@ from .parser import (
     SysMLPartDefinition,
     SysMLPartReference,
     SysMLPortDefinition,
-    SysMLPortEndpoint,
+    SysMLPortReference,
     SysMLRequirement,
     load_architecture,
 )
@@ -34,7 +34,7 @@ __all__ = [
     "SysMLPartDefinition",
     "SysMLPartReference",
     "SysMLPortDefinition",
-    "SysMLPortEndpoint",
+    "SysMLPortReference",
     "SysMLRequirement",
     "infer_primitive",
     "load_architecture",

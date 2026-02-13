@@ -1,4 +1,6 @@
 package Aircraft {
+
+
   part def AutopilotModule {
     doc /* F-16 autopilot, takes in sensor data and translates it into a equivalent hotas command. */
     attribute comment = "uses waypoint tracking";
@@ -39,5 +41,12 @@ package Aircraft {
     out port orientation : OrientationEuler;
     out port location : PositionXYZ;
     out port flight_status : FlightStatusPacket;
+  }
+
+  part def AircraftComposition {
+    doc /* Top-level aircraft composition with functional subsystem instances. */
+    part autopilot : AutopilotModule;
+    part missionComputer : MissionComputer;
+    part environment : Environment;
   }
 }

@@ -61,6 +61,7 @@ class SysMLPartReference:
     name: str
     target: str
     doc: Optional[str] = None
+    target_def: Optional["SysMLPartDefinition"] = None
 
     def __str__(self) -> str:
         return _json_dumps(self)
@@ -77,7 +78,7 @@ class SysMLPortDefinition:
 
 
 @dataclass
-class SysMLPortEndpoint:
+class SysMLPortReference:
     name: str
     direction: str  # "in" or "out"
     payload: str
@@ -93,7 +94,7 @@ class SysMLPartDefinition:
     name: str
     doc: Optional[str] = None
     attributes: Dict[str, SysMLAttribute] = field(default_factory=dict)
-    ports: List[SysMLPortEndpoint] = field(default_factory=list)
+    ports: List[SysMLPortReference] = field(default_factory=list)
     parts: List[SysMLPartReference] = field(default_factory=list)
 
     def __str__(self) -> str:
@@ -184,6 +185,7 @@ class SysMLFolderParser:
             connections.extend(_parse_connections(body))
 
         _attach_port_definitions(parts, port_defs)
+        _attach_part_definitions(parts)
         return SysMLArchitecture(
             package=package_name or "Package",
             parts=parts,
@@ -255,7 +257,7 @@ def _extract_named_blocks(body: str, keyword: str) -> List[Tuple[str, str]]:
 
 def _parse_part_block(name: str, block: str) -> SysMLPartDefinition:
     attributes: Dict[str, SysMLAttribute] = {}
-    ports: List[SysMLPortEndpoint] = []
+    ports: List[SysMLPortReference] = []
     parts: List[SysMLPartReference] = []
     pending_doc: Optional[str] = None
     part_doc: Optional[str] = None
@@ -342,14 +344,14 @@ def _normalize_port_name(name: str) -> str:
 
 def _parse_port_endpoint(
     direction: str, line: str, doc: Optional[str]
-) -> SysMLPortEndpoint:
+) -> SysMLPortReference:
     content = line[len(direction) :].strip()
     if content.endswith(";"):
         content = content[:-1].strip()
     if ":" not in content:
         raise ValueError(f"Malformed port declaration: {line}")
     name, payload = content.split(":", 1)
-    return SysMLPortEndpoint(
+    return SysMLPortReference(
         direction=direction,
         name=_normalize_port_name(name),
         payload=payload.strip(),
@@ -384,6 +386,12 @@ def _attach_port_definitions(
     for part in parts.values():
         for port in part.ports:
             port.payload_def = port_defs.get(port.payload)
+
+
+def _attach_part_definitions(parts: Dict[str, SysMLPartDefinition]) -> None:
+    for part in parts.values():
+        for subpart in part.parts:
+            subpart.target_def = parts.get(subpart.target)
 
 
 def _iter_block_items(block: str) -> Iterator[Tuple[str, str]]:

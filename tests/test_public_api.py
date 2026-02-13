@@ -37,7 +37,12 @@ def test_literal_parser_handles_primitives():
 def test_architecture_loader_from_fixture_directory():
     architecture = load_architecture(FIXTURE_ARCH_DIR)
     assert architecture.package == "Aircraft"
-    assert set(architecture.parts) == {"AutopilotModule", "MissionComputer", "Environment"}
+    assert set(architecture.parts) == {
+        "AutopilotModule",
+        "MissionComputer",
+        "Environment",
+        "AircraftComposition",
+    }
     assert set(architecture.port_definitions) == {
         "PilotCommand",
         "OrientationEuler",
@@ -77,3 +82,18 @@ def test_extracted_attribute_literals_are_parseable():
     assert parse_literal(waypoint_attr.value) == [0.0, 10.0, 20.0]
     assert parse_literal(architecture.part("AutopilotModule").attributes["waypointCount"].value) == 10
 
+
+def test_subparts_are_linked_to_part_definitions():
+    architecture = load_architecture(FIXTURE_ARCH_DIR)
+    aircraft = architecture.part("AircraftComposition")
+    by_name = {subpart.name: subpart for subpart in aircraft.parts}
+
+    assert by_name["autopilot"].target == "AutopilotModule"
+    assert by_name["autopilot"].target_def is not None
+    assert by_name["autopilot"].target_def.name == "AutopilotModule"
+
+    assert by_name["missionComputer"].target_def is not None
+    assert by_name["missionComputer"].target_def.name == "MissionComputer"
+
+    assert by_name["environment"].target_def is not None
+    assert by_name["environment"].target_def.name == "Environment"
