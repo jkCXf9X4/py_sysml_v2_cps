@@ -28,7 +28,7 @@ def _to_jsonable(value):
 
 def test_architecture_loader_from_fixture_directory():
     architecture = load_architecture(FIXTURE_ARCH_DIR)
-    composition = architecture.part("AircraftComposition")
+    composition = architecture.parts["AircraftComposition"]
     assert architecture.package == "Aircraft"
     assert set(architecture.parts) == {
         "AutopilotModule",
@@ -36,7 +36,7 @@ def test_architecture_loader_from_fixture_directory():
         "Environment",
         "AircraftComposition",
     }
-    assert set(architecture.port_definitions) == {
+    assert set(architecture._port_definitions) == {
         "PilotCommand",
         "OrientationEuler",
         "PositionXYZ",
@@ -60,7 +60,7 @@ def test_architecture_loader_from_fixture_file():
 
 def test_ports_are_linked_to_payload_definitions():
     architecture = load_architecture(FIXTURE_ARCH_DIR)
-    autopilot = architecture.part("AutopilotModule")
+    autopilot = architecture.parts["AutopilotModule"]
     by_name = {port.name: port for port in autopilot.ports}
     assert by_name["autopilotCmd"].payload == "PilotCommand"
     assert by_name["autopilotCmd"].payload_def is not None
@@ -71,14 +71,14 @@ def test_ports_are_linked_to_payload_definitions():
 
 def test_extracted_attribute_literals_are_parseable():
     architecture = load_architecture(FIXTURE_ARCH_DIR)
-    waypoint_attr = architecture.part("AutopilotModule").attributes["waypointX_km"]
+    waypoint_attr = architecture.parts["AutopilotModule"].attributes["waypointX_km"]
     assert waypoint_attr.value == [0.0, 10.0, 20.0]
-    assert architecture.part("AutopilotModule").attributes["waypointCount"].value == 10
+    assert architecture.parts["AutopilotModule"].attributes["waypointCount"].value == 10
 
 
 def test_subparts_are_linked_to_part_definitions():
     architecture = load_architecture(FIXTURE_ARCH_DIR)
-    aircraft = architecture.part("AircraftComposition")
+    aircraft = architecture.parts["AircraftComposition"]
     by_name = {subpart.name: subpart for subpart in aircraft.parts}
 
     assert by_name["autopilot"].target == "AutopilotModule"
@@ -92,9 +92,9 @@ def test_subparts_are_linked_to_part_definitions():
     assert by_name["environment"].target_def.name == "Environment"
 
 
-def test_connections_are_linked_to_part_and_port_definitions():
+def test_connections_are_linked_to_part_and__port_definitions():
     architecture = load_architecture(FIXTURE_ARCH_DIR)
-    composition = architecture.part("AircraftComposition")
+    composition = architecture.parts["AircraftComposition"]
 
     first = composition.connections[0]
     assert first.src_component == "autopilot"

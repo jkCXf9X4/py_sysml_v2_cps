@@ -93,14 +93,8 @@ class SysMLRequirement:
 class SysMLArchitecture:
     package: str
     parts: Dict[str, SysMLPartDefinition]
-    port_definitions: Dict[str, SysMLPortDefinition]
+    _port_definitions: Dict[str, SysMLPortDefinition]
     requirements: List[SysMLRequirement]
-
-    def part(self, name: str) -> SysMLPartDefinition:
-        return self.parts[name]
-
-    def port(self, name: str) -> SysMLPortDefinition:
-        return self.port_definitions[name]
 
     def __str__(self) -> str:
         return json_dumps(self)

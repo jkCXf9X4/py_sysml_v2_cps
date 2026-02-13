@@ -1,4 +1,126 @@
 {
+  "_port_definitions": {
+    "FlightStatusPacket": {
+      "attributes": {
+        "airspeed_mps": {
+          "doc": null,
+          "name": "airspeed_mps",
+          "type": "Real",
+          "value": null
+        },
+        "angle_of_attack_deg": {
+          "doc": null,
+          "name": "angle_of_attack_deg",
+          "type": "Real",
+          "value": null
+        },
+        "health_code": {
+          "doc": null,
+          "name": "health_code",
+          "type": "Integer",
+          "value": null
+        }
+      },
+      "doc": "Mission computer status feedback consumed by autonomy and analysis models.",
+      "name": "FlightStatusPacket"
+    },
+    "MissionStatus": {
+      "attributes": {
+        "complete": {
+          "doc": null,
+          "name": "complete",
+          "type": "Boolean",
+          "value": null
+        },
+        "total_waypoints": {
+          "doc": null,
+          "name": "total_waypoints",
+          "type": "Integer",
+          "value": null
+        },
+        "waypoint_index": {
+          "doc": null,
+          "name": "waypoint_index",
+          "type": "Integer",
+          "value": null
+        }
+      },
+      "doc": "Waypoint-tracking status produced by the autopilot for logging and requirement evaluation.",
+      "name": "MissionStatus"
+    },
+    "OrientationEuler": {
+      "attributes": {
+        "pitch_deg": {
+          "doc": null,
+          "name": "pitch_deg",
+          "type": "Real",
+          "value": null
+        },
+        "roll_deg": {
+          "doc": null,
+          "name": "roll_deg",
+          "type": "Real",
+          "value": null
+        },
+        "yaw_deg": {
+          "doc": null,
+          "name": "yaw_deg",
+          "type": "Real",
+          "value": null
+        }
+      },
+      "doc": "Air vehicle orientation expressed as Euler angles in degrees.",
+      "name": "OrientationEuler"
+    },
+    "PilotCommand": {
+      "attributes": {
+        "mode_switch": {
+          "doc": null,
+          "name": "mode_switch",
+          "type": "Integer",
+          "value": null
+        },
+        "stick_pitch_norm": {
+          "doc": null,
+          "name": "stick_pitch_norm",
+          "type": "Real",
+          "value": null
+        },
+        "stick_roll_norm": {
+          "doc": null,
+          "name": "stick_roll_norm",
+          "type": "Real",
+          "value": null
+        }
+      },
+      "doc": "HOTAS-style control payload shared across control surfaces and mission computer consumers.",
+      "name": "PilotCommand"
+    },
+    "PositionXYZ": {
+      "attributes": {
+        "x_km": {
+          "doc": null,
+          "name": "x_km",
+          "type": "Real",
+          "value": null
+        },
+        "y_km": {
+          "doc": null,
+          "name": "y_km",
+          "type": "Real",
+          "value": null
+        },
+        "z_km": {
+          "doc": null,
+          "name": "z_km",
+          "type": "Real",
+          "value": null
+        }
+      },
+      "doc": "Local navigation frame expressed in kilometers (x=North, y=East, z=Up).",
+      "name": "PositionXYZ"
+    }
+  },
   "package": "Aircraft",
   "parts": {
     "AircraftComposition": {
@@ -2497,128 +2619,6 @@
           }
         }
       ]
-    }
-  },
-  "port_definitions": {
-    "FlightStatusPacket": {
-      "attributes": {
-        "airspeed_mps": {
-          "doc": null,
-          "name": "airspeed_mps",
-          "type": "Real",
-          "value": null
-        },
-        "angle_of_attack_deg": {
-          "doc": null,
-          "name": "angle_of_attack_deg",
-          "type": "Real",
-          "value": null
-        },
-        "health_code": {
-          "doc": null,
-          "name": "health_code",
-          "type": "Integer",
-          "value": null
-        }
-      },
-      "doc": "Mission computer status feedback consumed by autonomy and analysis models.",
-      "name": "FlightStatusPacket"
-    },
-    "MissionStatus": {
-      "attributes": {
-        "complete": {
-          "doc": null,
-          "name": "complete",
-          "type": "Boolean",
-          "value": null
-        },
-        "total_waypoints": {
-          "doc": null,
-          "name": "total_waypoints",
-          "type": "Integer",
-          "value": null
-        },
-        "waypoint_index": {
-          "doc": null,
-          "name": "waypoint_index",
-          "type": "Integer",
-          "value": null
-        }
-      },
-      "doc": "Waypoint-tracking status produced by the autopilot for logging and requirement evaluation.",
-      "name": "MissionStatus"
-    },
-    "OrientationEuler": {
-      "attributes": {
-        "pitch_deg": {
-          "doc": null,
-          "name": "pitch_deg",
-          "type": "Real",
-          "value": null
-        },
-        "roll_deg": {
-          "doc": null,
-          "name": "roll_deg",
-          "type": "Real",
-          "value": null
-        },
-        "yaw_deg": {
-          "doc": null,
-          "name": "yaw_deg",
-          "type": "Real",
-          "value": null
-        }
-      },
-      "doc": "Air vehicle orientation expressed as Euler angles in degrees.",
-      "name": "OrientationEuler"
-    },
-    "PilotCommand": {
-      "attributes": {
-        "mode_switch": {
-          "doc": null,
-          "name": "mode_switch",
-          "type": "Integer",
-          "value": null
-        },
-        "stick_pitch_norm": {
-          "doc": null,
-          "name": "stick_pitch_norm",
-          "type": "Real",
-          "value": null
-        },
-        "stick_roll_norm": {
-          "doc": null,
-          "name": "stick_roll_norm",
-          "type": "Real",
-          "value": null
-        }
-      },
-      "doc": "HOTAS-style control payload shared across control surfaces and mission computer consumers.",
-      "name": "PilotCommand"
-    },
-    "PositionXYZ": {
-      "attributes": {
-        "x_km": {
-          "doc": null,
-          "name": "x_km",
-          "type": "Real",
-          "value": null
-        },
-        "y_km": {
-          "doc": null,
-          "name": "y_km",
-          "type": "Real",
-          "value": null
-        },
-        "z_km": {
-          "doc": null,
-          "name": "z_km",
-          "type": "Real",
-          "value": null
-        }
-      },
-      "doc": "Local navigation frame expressed in kilometers (x=North, y=East, z=Up).",
-      "name": "PositionXYZ"
     }
   },
   "requirements": [

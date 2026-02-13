@@ -6,7 +6,7 @@ from sysml import load_architecture
 def main() -> None:
     repo_root = Path(__file__).resolve().parents[1]
     architecture = load_architecture(repo_root / "tests" / "fixtures" / "aircraft_subset")
-    aircraft = architecture.part("AircraftComposition")
+    aircraft = architecture.parts["AircraftComposition"]
     print(f"package={architecture.package}")
     print(f"parts={len(architecture.parts)}")
     print(f"connections={len(aircraft.connections)}")
