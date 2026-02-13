@@ -17,6 +17,7 @@ from .definitions import (
     SysMLRequirement,
 )
 from .parser_utils import collect_block, normalize_doc, strip_inline_comment
+from .type_utils import parse_literal
 
 
 class SysMLFolderParser:
@@ -186,7 +187,7 @@ def _parse_attribute(line: str, doc: Optional[str]) -> SysMLAttribute:
     if "=" in content:
         name, value = content.split("=", 1)
         name = name.strip()
-        value = value.strip()
+        value = parse_literal(value.strip())
     elif ":" in content:
         name, attr_type = content.split(":", 1)
         name = name.strip()

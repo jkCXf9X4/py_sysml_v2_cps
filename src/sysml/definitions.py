@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional
 
 from .parser_utils import json_dumps
 
@@ -12,7 +12,7 @@ from .parser_utils import json_dumps
 class SysMLAttribute:
     name: str
     type: Optional[str] = None
-    value: Optional[str] = None
+    value: Optional[Any] = None
     doc: Optional[str] = None
 
     def __str__(self) -> str:

@@ -113,19 +113,23 @@
                 "doc": null,
                 "name": "comment",
                 "type": null,
-                "value": "\"uses waypoint tracking\""
+                "value": "uses waypoint tracking"
               },
               "waypointCount": {
                 "doc": null,
                 "name": "waypointCount",
                 "type": null,
-                "value": "10"
+                "value": 10
               },
               "waypointX_km": {
                 "doc": null,
                 "name": "waypointX_km",
                 "type": null,
-                "value": "[0.0, 10.0, 20.0]"
+                "value": [
+                  0.0,
+                  10.0,
+                  20.0
+                ]
               }
             },
             "connections": [],
@@ -589,19 +593,23 @@
                 "doc": null,
                 "name": "comment",
                 "type": null,
-                "value": "\"uses waypoint tracking\""
+                "value": "uses waypoint tracking"
               },
               "waypointCount": {
                 "doc": null,
                 "name": "waypointCount",
                 "type": null,
-                "value": "10"
+                "value": 10
               },
               "waypointX_km": {
                 "doc": null,
                 "name": "waypointX_km",
                 "type": null,
-                "value": "[0.0, 10.0, 20.0]"
+                "value": [
+                  0.0,
+                  10.0,
+                  20.0
+                ]
               }
             },
             "connections": [],
@@ -962,19 +970,23 @@
                 "doc": null,
                 "name": "comment",
                 "type": null,
-                "value": "\"uses waypoint tracking\""
+                "value": "uses waypoint tracking"
               },
               "waypointCount": {
                 "doc": null,
                 "name": "waypointCount",
                 "type": null,
-                "value": "10"
+                "value": 10
               },
               "waypointX_km": {
                 "doc": null,
                 "name": "waypointX_km",
                 "type": null,
-                "value": "[0.0, 10.0, 20.0]"
+                "value": [
+                  0.0,
+                  10.0,
+                  20.0
+                ]
               }
             },
             "connections": [],
@@ -1335,19 +1347,23 @@
                 "doc": null,
                 "name": "comment",
                 "type": null,
-                "value": "\"uses waypoint tracking\""
+                "value": "uses waypoint tracking"
               },
               "waypointCount": {
                 "doc": null,
                 "name": "waypointCount",
                 "type": null,
-                "value": "10"
+                "value": 10
               },
               "waypointX_km": {
                 "doc": null,
                 "name": "waypointX_km",
                 "type": null,
-                "value": "[0.0, 10.0, 20.0]"
+                "value": [
+                  0.0,
+                  10.0,
+                  20.0
+                ]
               }
             },
             "connections": [],
@@ -1714,19 +1730,23 @@
                 "doc": null,
                 "name": "comment",
                 "type": null,
-                "value": "\"uses waypoint tracking\""
+                "value": "uses waypoint tracking"
               },
               "waypointCount": {
                 "doc": null,
                 "name": "waypointCount",
                 "type": null,
-                "value": "10"
+                "value": 10
               },
               "waypointX_km": {
                 "doc": null,
                 "name": "waypointX_km",
                 "type": null,
-                "value": "[0.0, 10.0, 20.0]"
+                "value": [
+                  0.0,
+                  10.0,
+                  20.0
+                ]
               }
             },
             "connections": [],
@@ -2104,19 +2124,23 @@
           "doc": null,
           "name": "comment",
           "type": null,
-          "value": "\"uses waypoint tracking\""
+          "value": "uses waypoint tracking"
         },
         "waypointCount": {
           "doc": null,
           "name": "waypointCount",
           "type": null,
-          "value": "10"
+          "value": 10
         },
         "waypointX_km": {
           "doc": null,
           "name": "waypointX_km",
           "type": null,
-          "value": "[0.0, 10.0, 20.0]"
+          "value": [
+            0.0,
+            10.0,
+            20.0
+          ]
         }
       },
       "connections": [],

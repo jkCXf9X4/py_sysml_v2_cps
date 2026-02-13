@@ -2,7 +2,7 @@
 
 __version__ = "0.1.0"
 
-from .parser import (
+from .parsing import (
     SysMLArchitecture,
     SysMLAttribute,
     SysMLConnection,
@@ -14,17 +14,6 @@ from .parser import (
     SysMLRequirement,
     load_architecture,
 )
-from .type_utils import (
-    infer_primitive,
-    modelica_connector_type,
-    normalize_primitive,
-    optional_primitive,
-    parse_literal,
-    primitive_from_value,
-)
-
-# Backward-compatible name used in older examples/docs.
-parse_sysml_folder = load_architecture
 
 __all__ = [
     "SysMLArchitecture",
@@ -36,12 +25,5 @@ __all__ = [
     "SysMLPortDefinition",
     "SysMLPortReference",
     "SysMLRequirement",
-    "infer_primitive",
     "load_architecture",
-    "modelica_connector_type",
-    "normalize_primitive",
-    "optional_primitive",
-    "parse_literal",
-    "parse_sysml_folder",
-    "primitive_from_value",
 ]

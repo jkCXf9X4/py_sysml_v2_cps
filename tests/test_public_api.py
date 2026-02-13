@@ -4,7 +4,6 @@ from pathlib import Path
 
 from sysml import (
     load_architecture,
-    parse_literal,
 )
 
 
@@ -25,13 +24,6 @@ def _to_jsonable(value):
     if isinstance(value, Path):
         return str(value)
     return value
-
-
-def test_literal_parser_handles_primitives():
-    assert parse_literal("true") is True
-    assert parse_literal("3.5") == 3.5
-    assert parse_literal("\"abc\"") == "abc"
-    assert parse_literal("[1.0, 2.0]") == [1.0, 2.0]
 
 
 def test_architecture_loader_from_fixture_directory():
@@ -80,8 +72,8 @@ def test_ports_are_linked_to_payload_definitions():
 def test_extracted_attribute_literals_are_parseable():
     architecture = load_architecture(FIXTURE_ARCH_DIR)
     waypoint_attr = architecture.part("AutopilotModule").attributes["waypointX_km"]
-    assert parse_literal(waypoint_attr.value) == [0.0, 10.0, 20.0]
-    assert parse_literal(architecture.part("AutopilotModule").attributes["waypointCount"].value) == 10
+    assert waypoint_attr.value == [0.0, 10.0, 20.0]
+    assert architecture.part("AutopilotModule").attributes["waypointCount"].value == 10
 
 
 def test_subparts_are_linked_to_part_definitions():
