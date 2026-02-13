@@ -112,8 +112,8 @@ def _extract_named_blocks(body: str, keyword: str) -> List[Tuple[str, str]]:
 
 def _parse_part_block(name: str, block: str) -> SysMLPartDefinition:
     attributes: Dict[str, SysMLAttribute] = {}
-    ports: List[SysMLPortReference] = []
-    parts: List[SysMLPartReference] = []
+    ports: Dict[str, SysMLPortReference] = {}
+    parts: Dict[str, SysMLPartReference] = {}
     connections: List[SysMLConnection] = []
     pending_doc: Optional[str] = None
     part_doc: Optional[str] = None
@@ -134,11 +134,14 @@ def _parse_part_block(name: str, block: str) -> SysMLPartDefinition:
             attr = _parse_attribute(line, pending_doc)
             attributes[attr.name] = attr
         elif line.startswith("in port "):
-            ports.append(_parse_port_endpoint("in", line, pending_doc))
+            port = _parse_port_endpoint("in", line, pending_doc)
+            ports[port.name] = port
         elif line.startswith("out port "):
-            ports.append(_parse_port_endpoint("out", line, pending_doc))
+            port = _parse_port_endpoint("out", line, pending_doc)
+            ports[port.name] = port
         elif line.startswith("part "):
-            parts.append(_parse_part_reference(line, pending_doc))
+            part = _parse_part_reference(line, pending_doc)
+            parts[part.name] = part
         elif line.startswith("connect "):
             connections.append(_parse_connection(line))
 
@@ -247,20 +250,22 @@ def _attach__port_definitions(
     parts: Dict[str, SysMLPartDefinition], port_defs: Dict[str, SysMLPortDefinition]
 ) -> None:
     for part in parts.values():
-        for port in part.ports:
+        for port in part.ports.values():
             port.payload_def = port_defs.get(port.payload)
 
 
 def _attach_part_definitions(parts: Dict[str, SysMLPartDefinition]) -> None:
     for part in parts.values():
-        for subpart in part.parts:
+        for subpart in part.parts.values():
             subpart.target_def = parts.get(subpart.target)
 
 
 def _attach_connection_definitions(parts: Dict[str, SysMLPartDefinition]) -> None:
     instance_to_part_def = _build_instance_to_part_definition_map(parts)
     for part in parts.values():
-        local_instances = {subpart.name: subpart.target_def for subpart in part.parts}
+        local_instances = {
+            subpart.name: subpart.target_def for subpart in part.parts.values()
+        }
         for connection in part.connections:
             connection.src_part_def = (
                 parts.get(connection.src_component)
@@ -285,7 +290,7 @@ def _build_instance_to_part_definition_map(
 ) -> Dict[str, SysMLPartDefinition]:
     mapping: Dict[str, SysMLPartDefinition] = {}
     for part in parts.values():
-        for subpart in part.parts:
+        for subpart in part.parts.values():
             if subpart.target_def is not None:
                 mapping[subpart.name] = subpart.target_def
     return mapping
@@ -296,10 +301,7 @@ def _find_port_reference(
 ) -> Optional[SysMLPortReference]:
     if part is None:
         return None
-    for port in part.ports:
-        if port.name == port_name:
-            return port
-    return None
+    return part.ports.get(port_name)
 
 
 def _iter_block_items(block: str) -> Iterator[Tuple[str, str]]:

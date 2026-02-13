@@ -11,7 +11,7 @@ def main() -> None:
     print(f"parts={len(architecture.parts)}")
     print(f"connections={len(aircraft.connections)}")
     print("subparts:")
-    for subpart in aircraft.parts:
+    for subpart in aircraft.parts.values():
         target_name = subpart.target_def.name if subpart.target_def else "<unresolved>"
         print(f"  - {subpart.name}: {target_name}")
 

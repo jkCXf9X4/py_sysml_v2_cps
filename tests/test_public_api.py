@@ -61,7 +61,7 @@ def test_architecture_loader_from_fixture_file():
 def test_ports_are_linked_to_payload_definitions():
     architecture = load_architecture(FIXTURE_ARCH_DIR)
     autopilot = architecture.parts["AutopilotModule"]
-    by_name = {port.name: port for port in autopilot.ports}
+    by_name = autopilot.ports
     assert by_name["autopilotCmd"].payload == "PilotCommand"
     assert by_name["autopilotCmd"].payload_def is not None
     assert by_name["autopilotCmd"].payload_def.name == "PilotCommand"
@@ -79,7 +79,7 @@ def test_extracted_attribute_literals_are_parseable():
 def test_subparts_are_linked_to_part_definitions():
     architecture = load_architecture(FIXTURE_ARCH_DIR)
     aircraft = architecture.parts["AircraftComposition"]
-    by_name = {subpart.name: subpart for subpart in aircraft.parts}
+    by_name = aircraft.parts
 
     assert by_name["autopilot"].target == "AutopilotModule"
     assert by_name["autopilot"].target_def is not None

@@ -72,8 +72,8 @@ class SysMLPartDefinition:
     name: str
     doc: Optional[str] = None
     attributes: Dict[str, SysMLAttribute] = field(default_factory=dict)
-    ports: List[SysMLPortReference] = field(default_factory=list)
-    parts: List[SysMLPartReference] = field(default_factory=list)
+    ports: Dict[str, SysMLPortReference] = field(default_factory=dict)
+    parts: Dict[str, SysMLPartReference] = field(default_factory=dict)
     connections: List[SysMLConnection] = field(default_factory=list)
 
     def __str__(self) -> str:
