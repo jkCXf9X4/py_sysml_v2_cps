@@ -96,6 +96,7 @@ class SysMLPartDefinition:
     attributes: Dict[str, SysMLAttribute] = field(default_factory=dict)
     ports: List[SysMLPortReference] = field(default_factory=list)
     parts: List[SysMLPartReference] = field(default_factory=list)
+    connections: List["SysMLConnection"] = field(default_factory=list)
 
     def __str__(self) -> str:
         return _json_dumps(self)
@@ -131,7 +132,6 @@ class SysMLArchitecture:
     parts: Dict[str, SysMLPartDefinition]
     port_definitions: Dict[str, SysMLPortDefinition]
     requirements: List[SysMLRequirement]
-    connections: List[SysMLConnection]
 
     def part(self, name: str) -> SysMLPartDefinition:
         return self.parts[name]
@@ -160,7 +160,6 @@ class SysMLFolderParser:
         parts: Dict[str, SysMLPartDefinition] = {}
         port_defs: Dict[str, SysMLPortDefinition] = {}
         requirements: List[SysMLRequirement] = []
-        connections: List[SysMLConnection] = []
         package_sections: List[str] = []
         package_name: Optional[str] = None
 
@@ -186,17 +185,15 @@ class SysMLFolderParser:
                 port_defs[name] = _parse_port_block(name, block)
 
             requirements.extend(_parse_requirements(body))
-            connections.extend(_parse_connections(body))
 
         _attach_port_definitions(parts, port_defs)
         _attach_part_definitions(parts)
-        _attach_connection_definitions(parts, connections)
+        _attach_connection_definitions(parts)
         return SysMLArchitecture(
             package=package_name or "Package",
             parts=parts,
             port_definitions=port_defs,
             requirements=requirements,
-            connections=connections,
         )
 
 
@@ -264,6 +261,7 @@ def _parse_part_block(name: str, block: str) -> SysMLPartDefinition:
     attributes: Dict[str, SysMLAttribute] = {}
     ports: List[SysMLPortReference] = []
     parts: List[SysMLPartReference] = []
+    connections: List[SysMLConnection] = []
     pending_doc: Optional[str] = None
     part_doc: Optional[str] = None
 
@@ -289,11 +287,18 @@ def _parse_part_block(name: str, block: str) -> SysMLPartDefinition:
             ports.append(_parse_port_endpoint("out", line, pending_doc))
         elif line.startswith("part "):
             parts.append(_parse_part_reference(line, pending_doc))
+        elif line.startswith("connect "):
+            connections.append(_parse_connection(line))
 
         pending_doc = None
 
     return SysMLPartDefinition(
-        name=name, doc=part_doc, attributes=attributes, ports=ports, parts=parts
+        name=name,
+        doc=part_doc,
+        attributes=attributes,
+        ports=ports,
+        parts=parts,
+        connections=connections,
     )
 
 
@@ -400,17 +405,36 @@ def _attach_part_definitions(parts: Dict[str, SysMLPartDefinition]) -> None:
 
 
 def _attach_connection_definitions(
-    parts: Dict[str, SysMLPartDefinition], connections: List[SysMLConnection]
+    parts: Dict[str, SysMLPartDefinition]
 ) -> None:
-    for connection in connections:
-        connection.src_part_def = parts.get(connection.src_component)
-        connection.dst_part_def = parts.get(connection.dst_component)
-        connection.src_port_def = _find_port_reference(
-            connection.src_part_def, connection.src_port
-        )
-        connection.dst_port_def = _find_port_reference(
-            connection.dst_part_def, connection.dst_port
-        )
+    instance_to_part_def = _build_instance_to_part_definition_map(parts)
+
+    for part in parts.values():
+        local_instances = {subpart.name: subpart.target_def for subpart in part.parts}
+        for connection in part.connections:
+            connection.src_part_def = parts.get(connection.src_component) or local_instances.get(
+                connection.src_component
+            ) or instance_to_part_def.get(connection.src_component)
+            connection.dst_part_def = parts.get(connection.dst_component) or local_instances.get(
+                connection.dst_component
+            ) or instance_to_part_def.get(connection.dst_component)
+            connection.src_port_def = _find_port_reference(
+                connection.src_part_def, connection.src_port
+            )
+            connection.dst_port_def = _find_port_reference(
+                connection.dst_part_def, connection.dst_port
+            )
+
+
+def _build_instance_to_part_definition_map(
+    parts: Dict[str, SysMLPartDefinition]
+) -> Dict[str, SysMLPartDefinition]:
+    mapping: Dict[str, SysMLPartDefinition] = {}
+    for part in parts.values():
+        for subpart in part.parts:
+            if subpart.target_def is not None:
+                mapping[subpart.name] = subpart.target_def
+    return mapping
 
 
 def _find_port_reference(
@@ -465,18 +489,21 @@ def _parse_requirements(body: str) -> List[SysMLRequirement]:
 
 
 def _parse_connections(body: str) -> List[SysMLConnection]:
-    connections: List[SysMLConnection] = []
     pattern = re.compile(
-        r"connect\s+([A-Za-z0-9_]+)\.([A-Za-z0-9_]+)\s+to\s+([A-Za-z0-9_]+)\.([A-Za-z0-9_]+)\s*;",
-        re.MULTILINE,
+        r"connect\s+([A-Za-z0-9_]+)\.([A-Za-z0-9_]+)\s+to\s+([A-Za-z0-9_]+)\.([A-Za-z0-9_]+)\s*;"
     )
-    for match in pattern.finditer(body):
-        connections.append(
-            SysMLConnection(
-                src_component=match.group(1),
-                src_port=match.group(2),
-                dst_component=match.group(3),
-                dst_port=match.group(4),
-            )
+    match = pattern.fullmatch(body.strip())
+    if match is None:
+        raise ValueError(f"Malformed connection declaration: {body}")
+    return [
+        SysMLConnection(
+            src_component=match.group(1),
+            src_port=match.group(2),
+            dst_component=match.group(3),
+            dst_port=match.group(4),
         )
-    return connections
+    ]
+
+
+def _parse_connection(line: str) -> SysMLConnection:
+    return _parse_connections(line)[0]

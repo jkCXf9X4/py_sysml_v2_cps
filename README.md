@@ -37,6 +37,29 @@ pip install "git+https://github.com/jkCXf9X4/py_sysml_v2_cps.git@v0.1.0"
 
 [Example](examples/parse_architecture.py)
 
+```python
+from sysml import load_architecture
+
+architecture = load_architecture("tests/fixtures/aircraft_subset")
+aircraft = architecture.part("AircraftComposition")
+
+# Connections belong to the part definition, not SysMLArchitecture.
+for connection in aircraft.connections:
+    print(
+        connection.src_part_def.name,
+        connection.src_port_def.name,
+        "->",
+        connection.dst_part_def.name,
+        connection.dst_port_def.name,
+    )
+```
+
+Run the bundled example from this repository root:
+
+```bash
+PYTHONPATH=src python3 examples/parse_architecture.py
+```
+
 ## Development
 
 Run package-local tests:

@@ -43,10 +43,4 @@ package Aircraft {
     out port flight_status : FlightStatusPacket;
   }
 
-  part def AircraftComposition {
-    doc /* Top-level aircraft composition with functional subsystem instances. */
-    part autopilot : AutopilotModule;
-    part missionComputer : MissionComputer;
-    part environment : Environment;
-  }
 }

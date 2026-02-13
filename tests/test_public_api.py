@@ -36,6 +36,7 @@ def test_literal_parser_handles_primitives():
 
 def test_architecture_loader_from_fixture_directory():
     architecture = load_architecture(FIXTURE_ARCH_DIR)
+    composition = architecture.part("AircraftComposition")
     assert architecture.package == "Aircraft"
     assert set(architecture.parts) == {
         "AutopilotModule",
@@ -50,7 +51,7 @@ def test_architecture_loader_from_fixture_directory():
         "FlightStatusPacket",
         "MissionStatus",
     }
-    assert len(architecture.connections) == 5
+    assert len(composition.connections) == 5
     assert len(architecture.requirements) == 2
 
     # Keep a checked-in JSON snapshot of the parsed fixture for easy diffing.
@@ -59,7 +60,7 @@ def test_architecture_loader_from_fixture_directory():
 
 
 def test_architecture_loader_from_fixture_file():
-    arch_file = FIXTURE_ARCH_DIR / "architecture.sysml"
+    arch_file = FIXTURE_ARCH_DIR / "part_definitions.sysml"
     architecture = load_architecture(arch_file)
     assert architecture.package == "Aircraft"
     assert "AutopilotModule" in architecture.parts
@@ -101,11 +102,12 @@ def test_subparts_are_linked_to_part_definitions():
 
 def test_connections_are_linked_to_part_and_port_definitions():
     architecture = load_architecture(FIXTURE_ARCH_DIR)
+    composition = architecture.part("AircraftComposition")
 
-    first = architecture.connections[0]
-    assert first.src_component == "AutopilotModule"
+    first = composition.connections[0]
+    assert first.src_component == "autopilot"
     assert first.src_port == "autopilotCmd"
-    assert first.dst_component == "MissionComputer"
+    assert first.dst_component == "missionComputer"
     assert first.dst_port == "autopilotInput"
 
     assert first.src_part_def is not None
