@@ -2,7 +2,7 @@ import json
 from dataclasses import fields, is_dataclass
 from pathlib import Path
 
-from sysml import (
+from pycps_sysmlv2 import (
     load_architecture,
 )
 

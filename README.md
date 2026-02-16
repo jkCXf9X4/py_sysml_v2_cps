@@ -1,4 +1,4 @@
-# py-sysml-v2-cps
+# pycps_sysmlv2
 
 Standalone Python SysML v2 parsing and helper utilities for CPS development.
 
@@ -38,7 +38,7 @@ pip install "git+https://github.com/jkCXf9X4/py_sysml_v2_cps.git@v0.1.0"
 [Example](examples/parse_architecture.py)
 
 ```python
-from sysml import load_architecture
+from pycps_sysmlv2 import load_architecture
 
 architecture = load_architecture("tests/fixtures/aircraft_subset")
 aircraft = architecture.part_definitions["AircraftComposition"]
@@ -76,7 +76,7 @@ python -m build
 
 ## Package layout
 
-- `src/sysml/` - package implementation
+- `src/pycps_sysmlv2/` - package implementation
 - `tests/` - package-local tests
 - `examples/` - small usage scripts
 - `docs/` - package-specific notes

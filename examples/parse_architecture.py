@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from sysml import load_architecture
+from pycps_sysmlv2 import load_architecture
 
 
 def main() -> None:
