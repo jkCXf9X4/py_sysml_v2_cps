@@ -11,21 +11,6 @@ FIXTURE_ARCH_DIR = Path(__file__).resolve().parent / "fixtures" / "aircraft_subs
 FIXTURE_REFERENCE_JSON = FIXTURE_ARCH_DIR / "architecture_reference.json"
 
 
-def _to_jsonable(value):
-    if is_dataclass(value):
-        return {
-            field.name: _to_jsonable(getattr(value, field.name))
-            for field in fields(value)
-        }
-    if isinstance(value, dict):
-        return {str(key): _to_jsonable(val) for key, val in value.items()}
-    if isinstance(value, (list, tuple, set)):
-        return [_to_jsonable(item) for item in value]
-    if isinstance(value, Path):
-        return str(value)
-    return value
-
-
 def test_architecture_loader_from_fixture_directory():
     architecture = load_architecture(FIXTURE_ARCH_DIR)
     composition = architecture.part_definitions["AircraftComposition"]
@@ -47,8 +32,7 @@ def test_architecture_loader_from_fixture_directory():
     assert len(architecture.requirements) == 2
 
     # Keep a checked-in JSON snapshot of the parsed fixture for easy diffing.
-    snapshot = json.dumps(_to_jsonable(architecture), indent=2, sort_keys=True) + "\n"
-    FIXTURE_REFERENCE_JSON.write_text(snapshot)
+    FIXTURE_REFERENCE_JSON.write_text(str(architecture))
 
 
 def test_architecture_loader_from_fixture_file():
