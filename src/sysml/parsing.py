@@ -60,13 +60,13 @@ class SysMLFolderParser:
 
             requirements.extend(_parse_requirements(body))
 
-        _attach__port_definitions(parts, port_defs)
+        _attach_port_definitions(parts, port_defs)
         _attach_part_definitions(parts)
         _attach_connection_definitions(parts)
         return SysMLArchitecture(
             package=package_name or "Package",
-            parts=parts,
-            _port_definitions=port_defs,
+            part_definitions=parts,
+            port_definitions=port_defs,
             requirements=requirements,
         )
 
@@ -246,7 +246,7 @@ def _parse_connection(line: str) -> SysMLConnection:
     )
 
 
-def _attach__port_definitions(
+def _attach_port_definitions(
     parts: Dict[str, SysMLPartDefinition], port_defs: Dict[str, SysMLPortDefinition]
 ) -> None:
     for part in parts.values():

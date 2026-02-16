@@ -6,9 +6,9 @@ from sysml import load_architecture
 def main() -> None:
     repo_root = Path(__file__).resolve().parents[1]
     architecture = load_architecture(repo_root / "tests" / "fixtures" / "aircraft_subset")
-    aircraft = architecture.parts["AircraftComposition"]
+    aircraft = architecture.part_definitions["AircraftComposition"]
     print(f"package={architecture.package}")
-    print(f"parts={len(architecture.parts)}")
+    print(f"parts={len(architecture.part_definitions)}")
     print(f"connections={len(aircraft.connections)}")
     print("subparts:")
     for subpart in aircraft.parts.values():

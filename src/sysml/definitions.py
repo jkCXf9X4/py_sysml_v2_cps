@@ -8,6 +8,8 @@ from typing import Any, Dict, List, Optional
 from .parser_utils import json_dumps
 
 
+#  Definitions
+
 @dataclass
 class SysMLAttribute:
     name: str
@@ -20,33 +22,9 @@ class SysMLAttribute:
 
 
 @dataclass
-class SysMLPartReference:
-    name: str
-    target: str
-    doc: Optional[str] = None
-    target_def: Optional["SysMLPartDefinition"] = None
-
-    def __str__(self) -> str:
-        return json_dumps(self)
-
-
-@dataclass
-class SysMLPortDefinition:
-    name: str
-    doc: Optional[str] = None
-    attributes: Dict[str, SysMLAttribute] = field(default_factory=dict)
-
-    def __str__(self) -> str:
-        return json_dumps(self)
-
-
-@dataclass
-class SysMLPortReference:
-    name: str
-    direction: str  # "in" or "out"
-    payload: str
-    doc: Optional[str] = None
-    payload_def: Optional[SysMLPortDefinition] = None
+class SysMLRequirement:
+    identifier: str
+    text: str
 
     def __str__(self) -> str:
         return json_dumps(self)
@@ -67,6 +45,16 @@ class SysMLConnection:
         return json_dumps(self)
 
 
+
+@dataclass
+class SysMLPortDefinition:
+    name: str
+    doc: Optional[str] = None
+    attributes: Dict[str, SysMLAttribute] = field(default_factory=dict)
+
+    def __str__(self) -> str:
+        return json_dumps(self)
+
 @dataclass
 class SysMLPartDefinition:
     name: str
@@ -80,21 +68,38 @@ class SysMLPartDefinition:
         return json_dumps(self)
 
 
+#  References
+
 @dataclass
-class SysMLRequirement:
-    identifier: str
-    text: str
+class SysMLPartReference:
+    name: str
+    target: str
+    doc: Optional[str] = None
+    target_def: Optional["SysMLPartDefinition"] = None
 
     def __str__(self) -> str:
         return json_dumps(self)
 
+@dataclass
+class SysMLPortReference:
+    name: str
+    direction: str  # "in" or "out"
+    payload: str
+    doc: Optional[str] = None
+    payload_def: Optional[SysMLPortDefinition] = None
+
+    def __str__(self) -> str:
+        return json_dumps(self)
+
+#  Architecture
 
 @dataclass
 class SysMLArchitecture:
     package: str
-    parts: Dict[str, SysMLPartDefinition]
-    _port_definitions: Dict[str, SysMLPortDefinition]
+    part_definitions: Dict[str, SysMLPartDefinition]
+    port_definitions: Dict[str, SysMLPortDefinition]
     requirements: List[SysMLRequirement]
 
     def __str__(self) -> str:
         return json_dumps(self)
+
