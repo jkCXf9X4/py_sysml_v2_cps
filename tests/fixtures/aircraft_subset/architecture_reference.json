@@ -112,19 +112,19 @@
               "comment": {
                 "doc": null,
                 "name": "comment",
-                "type": null,
+                "type": "String",
                 "value": "uses waypoint tracking"
               },
               "waypointCount": {
                 "doc": null,
                 "name": "waypointCount",
-                "type": null,
+                "type": "Integer",
                 "value": 10
               },
               "waypointX_km": {
                 "doc": null,
                 "name": "waypointX_km",
-                "type": null,
+                "type": "List[Real]",
                 "value": [
                   0.0,
                   10.0,
@@ -592,19 +592,19 @@
               "comment": {
                 "doc": null,
                 "name": "comment",
-                "type": null,
+                "type": "String",
                 "value": "uses waypoint tracking"
               },
               "waypointCount": {
                 "doc": null,
                 "name": "waypointCount",
-                "type": null,
+                "type": "Integer",
                 "value": 10
               },
               "waypointX_km": {
                 "doc": null,
                 "name": "waypointX_km",
-                "type": null,
+                "type": "List[Real]",
                 "value": [
                   0.0,
                   10.0,
@@ -969,19 +969,19 @@
               "comment": {
                 "doc": null,
                 "name": "comment",
-                "type": null,
+                "type": "String",
                 "value": "uses waypoint tracking"
               },
               "waypointCount": {
                 "doc": null,
                 "name": "waypointCount",
-                "type": null,
+                "type": "Integer",
                 "value": 10
               },
               "waypointX_km": {
                 "doc": null,
                 "name": "waypointX_km",
-                "type": null,
+                "type": "List[Real]",
                 "value": [
                   0.0,
                   10.0,
@@ -1346,19 +1346,19 @@
               "comment": {
                 "doc": null,
                 "name": "comment",
-                "type": null,
+                "type": "String",
                 "value": "uses waypoint tracking"
               },
               "waypointCount": {
                 "doc": null,
                 "name": "waypointCount",
-                "type": null,
+                "type": "Integer",
                 "value": 10
               },
               "waypointX_km": {
                 "doc": null,
                 "name": "waypointX_km",
-                "type": null,
+                "type": "List[Real]",
                 "value": [
                   0.0,
                   10.0,
@@ -1729,19 +1729,19 @@
               "comment": {
                 "doc": null,
                 "name": "comment",
-                "type": null,
+                "type": "String",
                 "value": "uses waypoint tracking"
               },
               "waypointCount": {
                 "doc": null,
                 "name": "waypointCount",
-                "type": null,
+                "type": "Integer",
                 "value": 10
               },
               "waypointX_km": {
                 "doc": null,
                 "name": "waypointX_km",
-                "type": null,
+                "type": "List[Real]",
                 "value": [
                   0.0,
                   10.0,
@@ -2123,19 +2123,19 @@
         "comment": {
           "doc": null,
           "name": "comment",
-          "type": null,
+          "type": "String",
           "value": "uses waypoint tracking"
         },
         "waypointCount": {
           "doc": null,
           "name": "waypointCount",
-          "type": null,
+          "type": "Integer",
           "value": 10
         },
         "waypointX_km": {
           "doc": null,
           "name": "waypointX_km",
-          "type": null,
+          "type": "List[Real]",
           "value": [
             0.0,
             10.0,

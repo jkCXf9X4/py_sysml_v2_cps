@@ -190,7 +190,8 @@ def _parse_attribute(line: str, doc: Optional[str]) -> SysMLAttribute:
     if "=" in content:
         name, value = content.split("=", 1)
         name = name.strip()
-        value = parse_literal(value.strip())
+        value, type = parse_literal(value.strip())
+        attr_type = type
     elif ":" in content:
         name, attr_type = content.split(":", 1)
         name = name.strip()
