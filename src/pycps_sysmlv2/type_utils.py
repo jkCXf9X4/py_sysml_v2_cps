@@ -7,6 +7,8 @@ from typing import Any, Optional, Tuple
 
 
 def evaluate_type(value):
+    if value is None:
+        return None, None
     if isinstance(value, bool):
         return value, "Boolean"
     if isinstance(value, int):
@@ -15,13 +17,34 @@ def evaluate_type(value):
         return value, "Real"
     if isinstance(value, (list, tuple)):
         l = list(value)
-        if len(value) == 0:
+        item, type = evaluate_type(get_item(l))
+        if item is None:
             return l, "List[]"
         else:
-            return l, f"List[{evaluate_type(l[0])[-1]}]"
+            return l, f"List[{type}]"
     if isinstance(value, str):
         return value, "String"
 
+def is_list(type: str):
+    return "List" in type
+
+def get_primitive_type(type: str):
+    if is_list(type):
+        return type[5:-1]
+    return type
+
+def value_iterator(values):
+    if isinstance(values, (list, tuple)):
+        for i in values:
+            yield i
+    else:
+        yield values
+
+def get_item(item: Any):
+    if isinstance(item, (list, tuple)):
+        return next((i for i in item if i is not None), None)
+    else:
+        return item
 
 def parse_literal(value: Optional[str]) -> Tuple[Optional[Any], Optional[str]]:
     if value is None:

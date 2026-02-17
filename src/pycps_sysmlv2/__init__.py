@@ -15,15 +15,11 @@ from .parsing import (
     load_architecture,
 )
 
-__all__ = [
-    "SysMLArchitecture",
-    "SysMLAttribute",
-    "SysMLConnection",
-    "SysMLFolderParser",
-    "SysMLPartDefinition",
-    "SysMLPartReference",
-    "SysMLPortDefinition",
-    "SysMLPortReference",
-    "SysMLRequirement",
-    "load_architecture",
-]
+from .type_utils import (
+    evaluate_type,
+    is_list,
+    get_primitive_type,
+    value_iterator, 
+    get_item,
+    parse_literal
+)
