@@ -8,20 +8,28 @@ from dataclasses import is_dataclass
 from pathlib import Path
 from typing import Any, Tuple
 
+from enum import StrEnum, auto
 
 def to_jsonable(value: Any) -> Any:
+    # Class
+    if isinstance(value, StrEnum): # Must be first to not recurse down into the enum class
+        return str(value)
     if is_dataclass(value):
         return {
             field_name: to_jsonable(getattr(value, field_name))
             for field_name in value.__dataclass_fields__
         }
+    if hasattr(value, "__dict__"):
+        return {str(key): to_jsonable(val) for key, val in vars(value).items()}
+
+    # Vaiables
     if isinstance(value, dict):
         return {str(key): to_jsonable(val) for key, val in value.items()}
     if isinstance(value, (list, tuple, set)):
         return [to_jsonable(item) for item in value]
     if isinstance(value, Path):
         return str(value)
-    return value
+    return str(value)
 
 
 def json_dumps(value: Any) -> str:

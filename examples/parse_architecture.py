@@ -12,7 +12,7 @@ def main() -> None:
     print(f"connections={len(aircraft.connections)}")
     print("subparts:")
     for subpart in aircraft.parts.values():
-        target_name = subpart.target_def.name if subpart.target_def else "<unresolved>"
+        target_name = subpart.part_def.name if subpart.part_def else "<unresolved>"
         print(f"  - {subpart.name}: {target_name}")
 
     print("connections:")

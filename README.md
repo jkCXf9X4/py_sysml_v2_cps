@@ -4,7 +4,7 @@ Standalone Python SysML v2 parsing and helper utilities for CPS development.
 
 ## Requirements
 
-- Python 3.10 or newer
+- Python 3.11 or newer
 
 ## Install
 
@@ -63,6 +63,10 @@ PYTHONPATH=src python3 examples/parse_architecture.py
 ## Development
 
 Run package-local tests:
+
+```bash
+python3.11 -m venv venv && . venv/bin/activate && pip install -r requirements.txt
+```
 
 ```bash
 python -m pytest -q

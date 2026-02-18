@@ -1,95 +1,60 @@
 import pytest
 
-from pycps_sysmlv2.type_utils import evaluate_type, get_primitive_type, is_list, parse_literal, value_iterator
+from pycps_sysmlv2.definitions import PrimitiveType, SysMLAttribute, SysMLType
 
 
 @pytest.mark.parametrize(
-    ("value", "expected_value", "expected_type"),
+    ("value", "expected_primitive"),
     [
-        (True, True, "Boolean"),
-        (42, 42, "Integer"),
-        (3.14, 3.14, "Real"),
-        ("abc", "abc", "String"),
-        ([1, 2, 3], [1, 2, 3], "List[Integer]"),
-        ((1.0, 2.0), [1.0, 2.0], "List[Real]"),
-        ([], [], "List[]"),
+        (True, PrimitiveType.Boolean),
+        (42, PrimitiveType.Integer),
+        (3.14, PrimitiveType.Real),
+        ("abc", PrimitiveType.String),
+        (None, PrimitiveType.Null),
     ],
 )
-def test_evaluate_type_identifies_python_primitives_and_lists(
-    value, expected_value, expected_type
+def test_sysml_type_from_value_identifies_python_primitives(value, expected_primitive):
+    sysml_type = SysMLType.from_value(value)
+    assert isinstance(sysml_type, SysMLType)
+    assert sysml_type.type == expected_primitive
+    assert sysml_type.primitive_type() == expected_primitive
+
+
+@pytest.mark.parametrize(
+    ("type_name", "expected_primitive"),
+    [
+        ("real", PrimitiveType.Real),
+        ("float64", PrimitiveType.Real),
+        ("int", PrimitiveType.Integer),
+        ("boolean", PrimitiveType.Boolean),
+        ("string", PrimitiveType.String),
+    ],
+)
+def test_sysml_type_from_string_maps_known_type_aliases(type_name, expected_primitive):
+    parsed = SysMLType.from_string(type_name)
+    assert isinstance(parsed, SysMLType)
+    assert parsed.type == expected_primitive
+
+
+@pytest.mark.parametrize(
+    ("literal", "expected_value", "expected_primitive"),
+    [
+        (None, None, PrimitiveType.Null),
+        ("", None, PrimitiveType.Null),
+        ("   ", None, PrimitiveType.Null),
+        ("true", True, PrimitiveType.Boolean),
+        ("FALSE", False, PrimitiveType.Boolean),
+        ("42", 42, PrimitiveType.Integer),
+        ("3.5", 3.5, PrimitiveType.Real),
+        ('"quoted"', "quoted", PrimitiveType.String),
+        ("unquoted_text", "unquoted_text", PrimitiveType.String),
+    ],
+)
+def test_sysml_attribute_from_literal_infers_value_and_sysml_type(
+    literal, expected_value, expected_primitive
 ):
-    parsed, type_name = evaluate_type(value)
-    assert parsed == expected_value
-    assert type_name == expected_type
-
-
-@pytest.mark.parametrize(
-    ("type_name", "expected"),
-    [
-        ("List[Integer]", True),
-        ("List[]", True),
-        ("Integer", False),
-        ("Boolean", False),
-    ],
-)
-def test_is_list_detects_list_type_names(type_name, expected):
-    assert is_list(type_name) is expected
-
-
-@pytest.mark.parametrize(
-    ("type_name", "expected"),
-    [
-        ("List[Integer]", "Integer"),
-        ("List[Real]", "Real"),
-        ("Integer", "Integer"),
-        ("String", "String"),
-    ],
-)
-def test_get_type_returns_inner_type_for_lists(type_name, expected):
-    assert get_primitive_type(type_name) == expected
-
-
-@pytest.mark.parametrize(
-    ("literal", "expected_value", "expected_type"),
-    [
-        (None, None, None),
-        ("", None, None),
-        ("   ", None, None),
-        ("true", True, "Boolean"),
-        ("FALSE", False, "Boolean"),
-        ("42", 42, "Integer"),
-        ("3.5", 3.5, "Real"),
-        ("1e-3", 0.001, "Real"),
-        ("[1, 2, 3]", [1, 2, 3], "List[Integer]"),
-        ("[]", [], "List[]"),
-        ('"quoted"', "quoted", "String"),
-        ("unquoted_text", "unquoted_text", "String"),
-    ],
-)
-def test_parse_literal_returns_value_and_identified_type(
-    literal, expected_value, expected_type
-):
-    parsed, type_name = parse_literal(literal)
-    assert parsed == expected_value
-    assert type_name == expected_type
-
-
-@pytest.mark.parametrize(
-    ("value", "expected_value"),
-    [
-        (True, [True]),
-        (42, [42]),
-        (3.14, [3.14]),
-        ("abc", ["abc"]),
-        ([1, 2, 3], [1, 2, 3]),
-        ((1.0, 2.0), [1.0, 2.0]),
-        ([], []),
-    ],
-)
-def test_evaluate_value_generator(
-    value, expected_value
-):
-    out = []
-    for i in value_iterator(value):
-        out.append(i)
-    assert out == expected_value
+    attr = SysMLAttribute.from_literal(name="x", value=literal, doc=None)
+    assert attr.name == "x"
+    assert attr.value == expected_value
+    assert isinstance(attr.type, SysMLType)
+    assert attr.type.type == expected_primitive

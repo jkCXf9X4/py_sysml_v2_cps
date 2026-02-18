@@ -8,6 +8,7 @@ from typing import Dict, Iterator, List, Optional, Tuple
 
 from .definitions import (
     SysMLArchitecture,
+    SysMLType,
     SysMLAttribute,
     SysMLConnection,
     SysMLPartDefinition,
@@ -17,7 +18,6 @@ from .definitions import (
     SysMLRequirement,
 )
 from .parser_utils import collect_block, normalize_doc, strip_inline_comment
-from .type_utils import parse_literal
 
 
 class SysMLFolderParser:
@@ -185,17 +185,18 @@ def _parse_attribute(line: str, doc: Optional[str]) -> SysMLAttribute:
     content = line[len("attribute ") :].strip()
     if content.endswith(";"):
         content = content[:-1].strip()
+
     attr_type: Optional[str] = None
     value: Optional[str] = None
     if "=" in content:
         name, value = content.split("=", 1)
         name = name.strip()
-        value, type = parse_literal(value.strip())
-        attr_type = type
+        value = SysMLAttribute._parse_literal(value)
+        attr_type = SysMLType.from_value(value)
     elif ":" in content:
         name, attr_type = content.split(":", 1)
         name = name.strip()
-        attr_type = attr_type.strip()
+        attr_type = SysMLType.from_string(attr_type.strip())
     else:
         name = content.strip()
     return SysMLAttribute(name=name, type=attr_type, value=value, doc=doc)
@@ -220,7 +221,7 @@ def _parse_port_endpoint(
     return SysMLPortReference(
         direction=direction,
         name=_normalize_port_name(name),
-        payload=payload.strip(),
+        port_name=payload.strip(),
         doc=doc,
     )
 
@@ -232,7 +233,7 @@ def _parse_part_reference(line: str, doc: Optional[str]) -> SysMLPartReference:
     if ":" not in content:
         raise ValueError(f"Malformed part reference: {line}")
     name, target = content.split(":", 1)
-    return SysMLPartReference(name=name.strip(), target=target.strip(), doc=doc)
+    return SysMLPartReference(name=name.strip(), part_name=target.strip(), doc=doc)
 
 
 def _parse_connection(line: str) -> SysMLConnection:
@@ -252,20 +253,20 @@ def _attach_port_definitions(
 ) -> None:
     for part in parts.values():
         for port in part.ports.values():
-            port.payload_def = port_defs.get(port.payload)
+            port.port_def = port_defs.get(port.port_name)
 
 
 def _attach_part_definitions(parts: Dict[str, SysMLPartDefinition]) -> None:
     for part in parts.values():
         for subpart in part.parts.values():
-            subpart.target_def = parts.get(subpart.target)
+            subpart.part_def = parts.get(subpart.part_name)
 
 
 def _attach_connection_definitions(parts: Dict[str, SysMLPartDefinition]) -> None:
     instance_to_part_def = _build_instance_to_part_definition_map(parts)
     for part in parts.values():
         local_instances = {
-            subpart.name: subpart.target_def for subpart in part.parts.values()
+            subpart.name: subpart.part_def for subpart in part.parts.values()
         }
         for connection in part.connections:
             connection.src_part_def = (
@@ -292,8 +293,8 @@ def _build_instance_to_part_definition_map(
     mapping: Dict[str, SysMLPartDefinition] = {}
     for part in parts.values():
         for subpart in part.parts.values():
-            if subpart.target_def is not None:
-                mapping[subpart.name] = subpart.target_def
+            if subpart.part_def is not None:
+                mapping[subpart.name] = subpart.part_def
     return mapping
 
 

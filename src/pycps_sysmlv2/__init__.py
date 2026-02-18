@@ -14,12 +14,3 @@ from .parsing import (
     SysMLRequirement,
     load_architecture,
 )
-
-from .type_utils import (
-    evaluate_type,
-    is_list,
-    get_primitive_type,
-    value_iterator, 
-    get_item,
-    parse_literal
-)

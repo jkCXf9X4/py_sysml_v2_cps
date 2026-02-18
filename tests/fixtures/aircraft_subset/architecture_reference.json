@@ -17,61 +17,79 @@
                 "direction": "in",
                 "doc": "Autopilot command bundle using same HOTAS signal structure.",
                 "name": "autopilotInput",
-                "payload": "PilotCommand",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "mode_switch": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "mode_switch",
-                      "type": "Integer",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Integer"
+                      },
+                      "value": "None"
                     },
                     "stick_pitch_norm": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "stick_pitch_norm",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "stick_roll_norm": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "stick_roll_norm",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "HOTAS-style control payload shared across control surfaces and mission computer consumers.",
                   "name": "PilotCommand"
-                }
+                },
+                "port_name": "PilotCommand"
               },
               "direction_command": {
                 "direction": "out",
                 "doc": "Command how to alter the current velocity vector, pith, yaw, roll",
                 "name": "direction_command",
-                "payload": "OrientationEuler",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "pitch_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "pitch_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "roll_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "roll_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "yaw_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "yaw_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Air vehicle orientation expressed as Euler angles in degrees.",
                   "name": "OrientationEuler"
-                }
+                },
+                "port_name": "OrientationEuler"
               }
             }
           },
@@ -80,55 +98,75 @@
             "direction": "in",
             "doc": "Autopilot command bundle using same HOTAS signal structure.",
             "name": "autopilotInput",
-            "payload": "PilotCommand",
-            "payload_def": {
+            "port_def": {
               "attributes": {
                 "mode_switch": {
-                  "doc": null,
+                  "doc": "None",
                   "name": "mode_switch",
-                  "type": "Integer",
-                  "value": null
+                  "type": {
+                    "string_definition": "None",
+                    "type": "Integer"
+                  },
+                  "value": "None"
                 },
                 "stick_pitch_norm": {
-                  "doc": null,
+                  "doc": "None",
                   "name": "stick_pitch_norm",
-                  "type": "Real",
-                  "value": null
+                  "type": {
+                    "string_definition": "None",
+                    "type": "Real"
+                  },
+                  "value": "None"
                 },
                 "stick_roll_norm": {
-                  "doc": null,
+                  "doc": "None",
                   "name": "stick_roll_norm",
-                  "type": "Real",
-                  "value": null
+                  "type": {
+                    "string_definition": "None",
+                    "type": "Real"
+                  },
+                  "value": "None"
                 }
               },
               "doc": "HOTAS-style control payload shared across control surfaces and mission computer consumers.",
               "name": "PilotCommand"
-            }
+            },
+            "port_name": "PilotCommand"
           },
           "src_component": "autopilot",
           "src_part_def": {
             "attributes": {
               "comment": {
-                "doc": null,
+                "doc": "None",
                 "name": "comment",
-                "type": "String",
+                "type": {
+                  "string_definition": "None",
+                  "type": "String"
+                },
                 "value": "uses waypoint tracking"
               },
               "waypointCount": {
-                "doc": null,
+                "doc": "None",
                 "name": "waypointCount",
-                "type": "Integer",
-                "value": 10
+                "type": {
+                  "string_definition": "None",
+                  "type": "Integer"
+                },
+                "value": "10"
               },
               "waypointX_km": {
-                "doc": null,
+                "doc": "None",
                 "name": "waypointX_km",
-                "type": "List[Real]",
+                "type": {
+                  "string_definition": "None",
+                  "type": [
+                    "Real"
+                  ]
+                },
                 "value": [
-                  0.0,
-                  10.0,
-                  20.0
+                  "0.0",
+                  "10.0",
+                  "20.0"
                 ]
               }
             },
@@ -141,151 +179,196 @@
                 "direction": "out",
                 "doc": "HOTAS-equivalent command stream for mission computer blending.",
                 "name": "autopilotCmd",
-                "payload": "PilotCommand",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "mode_switch": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "mode_switch",
-                      "type": "Integer",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Integer"
+                      },
+                      "value": "None"
                     },
                     "stick_pitch_norm": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "stick_pitch_norm",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "stick_roll_norm": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "stick_roll_norm",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "HOTAS-style control payload shared across control surfaces and mission computer consumers.",
                   "name": "PilotCommand"
-                }
+                },
+                "port_name": "PilotCommand"
               },
               "currentLocation": {
                 "direction": "in",
                 "doc": "Current local position from sensors",
                 "name": "currentLocation",
-                "payload": "PositionXYZ",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "x_km": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "x_km",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "y_km": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "y_km",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "z_km": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "z_km",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Local navigation frame expressed in kilometers (x=North, y=East, z=Up).",
                   "name": "PositionXYZ"
-                }
+                },
+                "port_name": "PositionXYZ"
               },
               "currentOrientation": {
                 "direction": "in",
                 "doc": "Current attitude from sensors.",
                 "name": "currentOrientation",
-                "payload": "OrientationEuler",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "pitch_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "pitch_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "roll_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "roll_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "yaw_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "yaw_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Air vehicle orientation expressed as Euler angles in degrees.",
                   "name": "OrientationEuler"
-                }
+                },
+                "port_name": "OrientationEuler"
               },
               "feedbackBus": {
                 "direction": "in",
                 "doc": "Mission-computer flight status back into autopilot.",
                 "name": "feedbackBus",
-                "payload": "FlightStatusPacket",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "airspeed_mps": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "airspeed_mps",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "angle_of_attack_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "angle_of_attack_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "health_code": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "health_code",
-                      "type": "Integer",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Integer"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Mission computer status feedback consumed by autonomy and analysis models.",
                   "name": "FlightStatusPacket"
-                }
+                },
+                "port_name": "FlightStatusPacket"
               },
               "missionStatus": {
                 "direction": "out",
                 "doc": "Waypoint progression for logging and verification.",
                 "name": "missionStatus",
-                "payload": "MissionStatus",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "complete": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "complete",
-                      "type": "Boolean",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Boolean"
+                      },
+                      "value": "None"
                     },
                     "total_waypoints": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "total_waypoints",
-                      "type": "Integer",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Integer"
+                      },
+                      "value": "None"
                     },
                     "waypoint_index": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "waypoint_index",
-                      "type": "Integer",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Integer"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Waypoint-tracking status produced by the autopilot for logging and requirement evaluation.",
                   "name": "MissionStatus"
-                }
+                },
+                "port_name": "MissionStatus"
               }
             }
           },
@@ -294,31 +377,40 @@
             "direction": "out",
             "doc": "HOTAS-equivalent command stream for mission computer blending.",
             "name": "autopilotCmd",
-            "payload": "PilotCommand",
-            "payload_def": {
+            "port_def": {
               "attributes": {
                 "mode_switch": {
-                  "doc": null,
+                  "doc": "None",
                   "name": "mode_switch",
-                  "type": "Integer",
-                  "value": null
+                  "type": {
+                    "string_definition": "None",
+                    "type": "Integer"
+                  },
+                  "value": "None"
                 },
                 "stick_pitch_norm": {
-                  "doc": null,
+                  "doc": "None",
                   "name": "stick_pitch_norm",
-                  "type": "Real",
-                  "value": null
+                  "type": {
+                    "string_definition": "None",
+                    "type": "Real"
+                  },
+                  "value": "None"
                 },
                 "stick_roll_norm": {
-                  "doc": null,
+                  "doc": "None",
                   "name": "stick_roll_norm",
-                  "type": "Real",
-                  "value": null
+                  "type": {
+                    "string_definition": "None",
+                    "type": "Real"
+                  },
+                  "value": "None"
                 }
               },
               "doc": "HOTAS-style control payload shared across control surfaces and mission computer consumers.",
               "name": "PilotCommand"
-            }
+            },
+            "port_name": "PilotCommand"
           }
         },
         {
@@ -332,156 +424,201 @@
             "ports": {
               "direction_command": {
                 "direction": "in",
-                "doc": null,
+                "doc": "None",
                 "name": "direction_command",
-                "payload": "OrientationEuler",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "pitch_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "pitch_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "roll_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "roll_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "yaw_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "yaw_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Air vehicle orientation expressed as Euler angles in degrees.",
                   "name": "OrientationEuler"
-                }
+                },
+                "port_name": "OrientationEuler"
               },
               "flight_status": {
                 "direction": "out",
-                "doc": null,
+                "doc": "None",
                 "name": "flight_status",
-                "payload": "FlightStatusPacket",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "airspeed_mps": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "airspeed_mps",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "angle_of_attack_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "angle_of_attack_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "health_code": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "health_code",
-                      "type": "Integer",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Integer"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Mission computer status feedback consumed by autonomy and analysis models.",
                   "name": "FlightStatusPacket"
-                }
+                },
+                "port_name": "FlightStatusPacket"
               },
               "location": {
                 "direction": "out",
-                "doc": null,
+                "doc": "None",
                 "name": "location",
-                "payload": "PositionXYZ",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "x_km": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "x_km",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "y_km": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "y_km",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "z_km": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "z_km",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Local navigation frame expressed in kilometers (x=North, y=East, z=Up).",
                   "name": "PositionXYZ"
-                }
+                },
+                "port_name": "PositionXYZ"
               },
               "orientation": {
                 "direction": "out",
                 "doc": "Feedback for simulated sensors",
                 "name": "orientation",
-                "payload": "OrientationEuler",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "pitch_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "pitch_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "roll_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "roll_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "yaw_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "yaw_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Air vehicle orientation expressed as Euler angles in degrees.",
                   "name": "OrientationEuler"
-                }
+                },
+                "port_name": "OrientationEuler"
               }
             }
           },
           "dst_port": "direction_command",
           "dst_port_def": {
             "direction": "in",
-            "doc": null,
+            "doc": "None",
             "name": "direction_command",
-            "payload": "OrientationEuler",
-            "payload_def": {
+            "port_def": {
               "attributes": {
                 "pitch_deg": {
-                  "doc": null,
+                  "doc": "None",
                   "name": "pitch_deg",
-                  "type": "Real",
-                  "value": null
+                  "type": {
+                    "string_definition": "None",
+                    "type": "Real"
+                  },
+                  "value": "None"
                 },
                 "roll_deg": {
-                  "doc": null,
+                  "doc": "None",
                   "name": "roll_deg",
-                  "type": "Real",
-                  "value": null
+                  "type": {
+                    "string_definition": "None",
+                    "type": "Real"
+                  },
+                  "value": "None"
                 },
                 "yaw_deg": {
-                  "doc": null,
+                  "doc": "None",
                   "name": "yaw_deg",
-                  "type": "Real",
-                  "value": null
+                  "type": {
+                    "string_definition": "None",
+                    "type": "Real"
+                  },
+                  "value": "None"
                 }
               },
               "doc": "Air vehicle orientation expressed as Euler angles in degrees.",
               "name": "OrientationEuler"
-            }
+            },
+            "port_name": "OrientationEuler"
           },
           "src_component": "missionComputer",
           "src_part_def": {
@@ -495,61 +632,79 @@
                 "direction": "in",
                 "doc": "Autopilot command bundle using same HOTAS signal structure.",
                 "name": "autopilotInput",
-                "payload": "PilotCommand",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "mode_switch": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "mode_switch",
-                      "type": "Integer",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Integer"
+                      },
+                      "value": "None"
                     },
                     "stick_pitch_norm": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "stick_pitch_norm",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "stick_roll_norm": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "stick_roll_norm",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "HOTAS-style control payload shared across control surfaces and mission computer consumers.",
                   "name": "PilotCommand"
-                }
+                },
+                "port_name": "PilotCommand"
               },
               "direction_command": {
                 "direction": "out",
                 "doc": "Command how to alter the current velocity vector, pith, yaw, roll",
                 "name": "direction_command",
-                "payload": "OrientationEuler",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "pitch_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "pitch_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "roll_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "roll_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "yaw_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "yaw_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Air vehicle orientation expressed as Euler angles in degrees.",
                   "name": "OrientationEuler"
-                }
+                },
+                "port_name": "OrientationEuler"
               }
             }
           },
@@ -558,31 +713,40 @@
             "direction": "out",
             "doc": "Command how to alter the current velocity vector, pith, yaw, roll",
             "name": "direction_command",
-            "payload": "OrientationEuler",
-            "payload_def": {
+            "port_def": {
               "attributes": {
                 "pitch_deg": {
-                  "doc": null,
+                  "doc": "None",
                   "name": "pitch_deg",
-                  "type": "Real",
-                  "value": null
+                  "type": {
+                    "string_definition": "None",
+                    "type": "Real"
+                  },
+                  "value": "None"
                 },
                 "roll_deg": {
-                  "doc": null,
+                  "doc": "None",
                   "name": "roll_deg",
-                  "type": "Real",
-                  "value": null
+                  "type": {
+                    "string_definition": "None",
+                    "type": "Real"
+                  },
+                  "value": "None"
                 },
                 "yaw_deg": {
-                  "doc": null,
+                  "doc": "None",
                   "name": "yaw_deg",
-                  "type": "Real",
-                  "value": null
+                  "type": {
+                    "string_definition": "None",
+                    "type": "Real"
+                  },
+                  "value": "None"
                 }
               },
               "doc": "Air vehicle orientation expressed as Euler angles in degrees.",
               "name": "OrientationEuler"
-            }
+            },
+            "port_name": "OrientationEuler"
           }
         },
         {
@@ -590,25 +754,36 @@
           "dst_part_def": {
             "attributes": {
               "comment": {
-                "doc": null,
+                "doc": "None",
                 "name": "comment",
-                "type": "String",
+                "type": {
+                  "string_definition": "None",
+                  "type": "String"
+                },
                 "value": "uses waypoint tracking"
               },
               "waypointCount": {
-                "doc": null,
+                "doc": "None",
                 "name": "waypointCount",
-                "type": "Integer",
-                "value": 10
+                "type": {
+                  "string_definition": "None",
+                  "type": "Integer"
+                },
+                "value": "10"
               },
               "waypointX_km": {
-                "doc": null,
+                "doc": "None",
                 "name": "waypointX_km",
-                "type": "List[Real]",
+                "type": {
+                  "string_definition": "None",
+                  "type": [
+                    "Real"
+                  ]
+                },
                 "value": [
-                  0.0,
-                  10.0,
-                  20.0
+                  "0.0",
+                  "10.0",
+                  "20.0"
                 ]
               }
             },
@@ -621,151 +796,196 @@
                 "direction": "out",
                 "doc": "HOTAS-equivalent command stream for mission computer blending.",
                 "name": "autopilotCmd",
-                "payload": "PilotCommand",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "mode_switch": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "mode_switch",
-                      "type": "Integer",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Integer"
+                      },
+                      "value": "None"
                     },
                     "stick_pitch_norm": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "stick_pitch_norm",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "stick_roll_norm": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "stick_roll_norm",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "HOTAS-style control payload shared across control surfaces and mission computer consumers.",
                   "name": "PilotCommand"
-                }
+                },
+                "port_name": "PilotCommand"
               },
               "currentLocation": {
                 "direction": "in",
                 "doc": "Current local position from sensors",
                 "name": "currentLocation",
-                "payload": "PositionXYZ",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "x_km": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "x_km",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "y_km": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "y_km",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "z_km": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "z_km",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Local navigation frame expressed in kilometers (x=North, y=East, z=Up).",
                   "name": "PositionXYZ"
-                }
+                },
+                "port_name": "PositionXYZ"
               },
               "currentOrientation": {
                 "direction": "in",
                 "doc": "Current attitude from sensors.",
                 "name": "currentOrientation",
-                "payload": "OrientationEuler",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "pitch_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "pitch_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "roll_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "roll_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "yaw_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "yaw_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Air vehicle orientation expressed as Euler angles in degrees.",
                   "name": "OrientationEuler"
-                }
+                },
+                "port_name": "OrientationEuler"
               },
               "feedbackBus": {
                 "direction": "in",
                 "doc": "Mission-computer flight status back into autopilot.",
                 "name": "feedbackBus",
-                "payload": "FlightStatusPacket",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "airspeed_mps": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "airspeed_mps",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "angle_of_attack_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "angle_of_attack_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "health_code": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "health_code",
-                      "type": "Integer",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Integer"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Mission computer status feedback consumed by autonomy and analysis models.",
                   "name": "FlightStatusPacket"
-                }
+                },
+                "port_name": "FlightStatusPacket"
               },
               "missionStatus": {
                 "direction": "out",
                 "doc": "Waypoint progression for logging and verification.",
                 "name": "missionStatus",
-                "payload": "MissionStatus",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "complete": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "complete",
-                      "type": "Boolean",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Boolean"
+                      },
+                      "value": "None"
                     },
                     "total_waypoints": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "total_waypoints",
-                      "type": "Integer",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Integer"
+                      },
+                      "value": "None"
                     },
                     "waypoint_index": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "waypoint_index",
-                      "type": "Integer",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Integer"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Waypoint-tracking status produced by the autopilot for logging and requirement evaluation.",
                   "name": "MissionStatus"
-                }
+                },
+                "port_name": "MissionStatus"
               }
             }
           },
@@ -774,31 +994,40 @@
             "direction": "in",
             "doc": "Current attitude from sensors.",
             "name": "currentOrientation",
-            "payload": "OrientationEuler",
-            "payload_def": {
+            "port_def": {
               "attributes": {
                 "pitch_deg": {
-                  "doc": null,
+                  "doc": "None",
                   "name": "pitch_deg",
-                  "type": "Real",
-                  "value": null
+                  "type": {
+                    "string_definition": "None",
+                    "type": "Real"
+                  },
+                  "value": "None"
                 },
                 "roll_deg": {
-                  "doc": null,
+                  "doc": "None",
                   "name": "roll_deg",
-                  "type": "Real",
-                  "value": null
+                  "type": {
+                    "string_definition": "None",
+                    "type": "Real"
+                  },
+                  "value": "None"
                 },
                 "yaw_deg": {
-                  "doc": null,
+                  "doc": "None",
                   "name": "yaw_deg",
-                  "type": "Real",
-                  "value": null
+                  "type": {
+                    "string_definition": "None",
+                    "type": "Real"
+                  },
+                  "value": "None"
                 }
               },
               "doc": "Air vehicle orientation expressed as Euler angles in degrees.",
               "name": "OrientationEuler"
-            }
+            },
+            "port_name": "OrientationEuler"
           },
           "src_component": "environment",
           "src_part_def": {
@@ -810,123 +1039,159 @@
             "ports": {
               "direction_command": {
                 "direction": "in",
-                "doc": null,
+                "doc": "None",
                 "name": "direction_command",
-                "payload": "OrientationEuler",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "pitch_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "pitch_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "roll_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "roll_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "yaw_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "yaw_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Air vehicle orientation expressed as Euler angles in degrees.",
                   "name": "OrientationEuler"
-                }
+                },
+                "port_name": "OrientationEuler"
               },
               "flight_status": {
                 "direction": "out",
-                "doc": null,
+                "doc": "None",
                 "name": "flight_status",
-                "payload": "FlightStatusPacket",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "airspeed_mps": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "airspeed_mps",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "angle_of_attack_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "angle_of_attack_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "health_code": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "health_code",
-                      "type": "Integer",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Integer"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Mission computer status feedback consumed by autonomy and analysis models.",
                   "name": "FlightStatusPacket"
-                }
+                },
+                "port_name": "FlightStatusPacket"
               },
               "location": {
                 "direction": "out",
-                "doc": null,
+                "doc": "None",
                 "name": "location",
-                "payload": "PositionXYZ",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "x_km": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "x_km",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "y_km": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "y_km",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "z_km": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "z_km",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Local navigation frame expressed in kilometers (x=North, y=East, z=Up).",
                   "name": "PositionXYZ"
-                }
+                },
+                "port_name": "PositionXYZ"
               },
               "orientation": {
                 "direction": "out",
                 "doc": "Feedback for simulated sensors",
                 "name": "orientation",
-                "payload": "OrientationEuler",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "pitch_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "pitch_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "roll_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "roll_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "yaw_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "yaw_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Air vehicle orientation expressed as Euler angles in degrees.",
                   "name": "OrientationEuler"
-                }
+                },
+                "port_name": "OrientationEuler"
               }
             }
           },
@@ -935,31 +1200,40 @@
             "direction": "out",
             "doc": "Feedback for simulated sensors",
             "name": "orientation",
-            "payload": "OrientationEuler",
-            "payload_def": {
+            "port_def": {
               "attributes": {
                 "pitch_deg": {
-                  "doc": null,
+                  "doc": "None",
                   "name": "pitch_deg",
-                  "type": "Real",
-                  "value": null
+                  "type": {
+                    "string_definition": "None",
+                    "type": "Real"
+                  },
+                  "value": "None"
                 },
                 "roll_deg": {
-                  "doc": null,
+                  "doc": "None",
                   "name": "roll_deg",
-                  "type": "Real",
-                  "value": null
+                  "type": {
+                    "string_definition": "None",
+                    "type": "Real"
+                  },
+                  "value": "None"
                 },
                 "yaw_deg": {
-                  "doc": null,
+                  "doc": "None",
                   "name": "yaw_deg",
-                  "type": "Real",
-                  "value": null
+                  "type": {
+                    "string_definition": "None",
+                    "type": "Real"
+                  },
+                  "value": "None"
                 }
               },
               "doc": "Air vehicle orientation expressed as Euler angles in degrees.",
               "name": "OrientationEuler"
-            }
+            },
+            "port_name": "OrientationEuler"
           }
         },
         {
@@ -967,25 +1241,36 @@
           "dst_part_def": {
             "attributes": {
               "comment": {
-                "doc": null,
+                "doc": "None",
                 "name": "comment",
-                "type": "String",
+                "type": {
+                  "string_definition": "None",
+                  "type": "String"
+                },
                 "value": "uses waypoint tracking"
               },
               "waypointCount": {
-                "doc": null,
+                "doc": "None",
                 "name": "waypointCount",
-                "type": "Integer",
-                "value": 10
+                "type": {
+                  "string_definition": "None",
+                  "type": "Integer"
+                },
+                "value": "10"
               },
               "waypointX_km": {
-                "doc": null,
+                "doc": "None",
                 "name": "waypointX_km",
-                "type": "List[Real]",
+                "type": {
+                  "string_definition": "None",
+                  "type": [
+                    "Real"
+                  ]
+                },
                 "value": [
-                  0.0,
-                  10.0,
-                  20.0
+                  "0.0",
+                  "10.0",
+                  "20.0"
                 ]
               }
             },
@@ -998,151 +1283,196 @@
                 "direction": "out",
                 "doc": "HOTAS-equivalent command stream for mission computer blending.",
                 "name": "autopilotCmd",
-                "payload": "PilotCommand",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "mode_switch": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "mode_switch",
-                      "type": "Integer",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Integer"
+                      },
+                      "value": "None"
                     },
                     "stick_pitch_norm": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "stick_pitch_norm",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "stick_roll_norm": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "stick_roll_norm",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "HOTAS-style control payload shared across control surfaces and mission computer consumers.",
                   "name": "PilotCommand"
-                }
+                },
+                "port_name": "PilotCommand"
               },
               "currentLocation": {
                 "direction": "in",
                 "doc": "Current local position from sensors",
                 "name": "currentLocation",
-                "payload": "PositionXYZ",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "x_km": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "x_km",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "y_km": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "y_km",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "z_km": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "z_km",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Local navigation frame expressed in kilometers (x=North, y=East, z=Up).",
                   "name": "PositionXYZ"
-                }
+                },
+                "port_name": "PositionXYZ"
               },
               "currentOrientation": {
                 "direction": "in",
                 "doc": "Current attitude from sensors.",
                 "name": "currentOrientation",
-                "payload": "OrientationEuler",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "pitch_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "pitch_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "roll_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "roll_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "yaw_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "yaw_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Air vehicle orientation expressed as Euler angles in degrees.",
                   "name": "OrientationEuler"
-                }
+                },
+                "port_name": "OrientationEuler"
               },
               "feedbackBus": {
                 "direction": "in",
                 "doc": "Mission-computer flight status back into autopilot.",
                 "name": "feedbackBus",
-                "payload": "FlightStatusPacket",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "airspeed_mps": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "airspeed_mps",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "angle_of_attack_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "angle_of_attack_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "health_code": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "health_code",
-                      "type": "Integer",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Integer"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Mission computer status feedback consumed by autonomy and analysis models.",
                   "name": "FlightStatusPacket"
-                }
+                },
+                "port_name": "FlightStatusPacket"
               },
               "missionStatus": {
                 "direction": "out",
                 "doc": "Waypoint progression for logging and verification.",
                 "name": "missionStatus",
-                "payload": "MissionStatus",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "complete": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "complete",
-                      "type": "Boolean",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Boolean"
+                      },
+                      "value": "None"
                     },
                     "total_waypoints": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "total_waypoints",
-                      "type": "Integer",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Integer"
+                      },
+                      "value": "None"
                     },
                     "waypoint_index": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "waypoint_index",
-                      "type": "Integer",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Integer"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Waypoint-tracking status produced by the autopilot for logging and requirement evaluation.",
                   "name": "MissionStatus"
-                }
+                },
+                "port_name": "MissionStatus"
               }
             }
           },
@@ -1151,31 +1481,40 @@
             "direction": "in",
             "doc": "Current local position from sensors",
             "name": "currentLocation",
-            "payload": "PositionXYZ",
-            "payload_def": {
+            "port_def": {
               "attributes": {
                 "x_km": {
-                  "doc": null,
+                  "doc": "None",
                   "name": "x_km",
-                  "type": "Real",
-                  "value": null
+                  "type": {
+                    "string_definition": "None",
+                    "type": "Real"
+                  },
+                  "value": "None"
                 },
                 "y_km": {
-                  "doc": null,
+                  "doc": "None",
                   "name": "y_km",
-                  "type": "Real",
-                  "value": null
+                  "type": {
+                    "string_definition": "None",
+                    "type": "Real"
+                  },
+                  "value": "None"
                 },
                 "z_km": {
-                  "doc": null,
+                  "doc": "None",
                   "name": "z_km",
-                  "type": "Real",
-                  "value": null
+                  "type": {
+                    "string_definition": "None",
+                    "type": "Real"
+                  },
+                  "value": "None"
                 }
               },
               "doc": "Local navigation frame expressed in kilometers (x=North, y=East, z=Up).",
               "name": "PositionXYZ"
-            }
+            },
+            "port_name": "PositionXYZ"
           },
           "src_component": "environment",
           "src_part_def": {
@@ -1187,156 +1526,201 @@
             "ports": {
               "direction_command": {
                 "direction": "in",
-                "doc": null,
+                "doc": "None",
                 "name": "direction_command",
-                "payload": "OrientationEuler",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "pitch_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "pitch_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "roll_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "roll_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "yaw_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "yaw_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Air vehicle orientation expressed as Euler angles in degrees.",
                   "name": "OrientationEuler"
-                }
+                },
+                "port_name": "OrientationEuler"
               },
               "flight_status": {
                 "direction": "out",
-                "doc": null,
+                "doc": "None",
                 "name": "flight_status",
-                "payload": "FlightStatusPacket",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "airspeed_mps": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "airspeed_mps",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "angle_of_attack_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "angle_of_attack_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "health_code": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "health_code",
-                      "type": "Integer",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Integer"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Mission computer status feedback consumed by autonomy and analysis models.",
                   "name": "FlightStatusPacket"
-                }
+                },
+                "port_name": "FlightStatusPacket"
               },
               "location": {
                 "direction": "out",
-                "doc": null,
+                "doc": "None",
                 "name": "location",
-                "payload": "PositionXYZ",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "x_km": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "x_km",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "y_km": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "y_km",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "z_km": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "z_km",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Local navigation frame expressed in kilometers (x=North, y=East, z=Up).",
                   "name": "PositionXYZ"
-                }
+                },
+                "port_name": "PositionXYZ"
               },
               "orientation": {
                 "direction": "out",
                 "doc": "Feedback for simulated sensors",
                 "name": "orientation",
-                "payload": "OrientationEuler",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "pitch_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "pitch_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "roll_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "roll_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "yaw_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "yaw_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Air vehicle orientation expressed as Euler angles in degrees.",
                   "name": "OrientationEuler"
-                }
+                },
+                "port_name": "OrientationEuler"
               }
             }
           },
           "src_port": "location",
           "src_port_def": {
             "direction": "out",
-            "doc": null,
+            "doc": "None",
             "name": "location",
-            "payload": "PositionXYZ",
-            "payload_def": {
+            "port_def": {
               "attributes": {
                 "x_km": {
-                  "doc": null,
+                  "doc": "None",
                   "name": "x_km",
-                  "type": "Real",
-                  "value": null
+                  "type": {
+                    "string_definition": "None",
+                    "type": "Real"
+                  },
+                  "value": "None"
                 },
                 "y_km": {
-                  "doc": null,
+                  "doc": "None",
                   "name": "y_km",
-                  "type": "Real",
-                  "value": null
+                  "type": {
+                    "string_definition": "None",
+                    "type": "Real"
+                  },
+                  "value": "None"
                 },
                 "z_km": {
-                  "doc": null,
+                  "doc": "None",
                   "name": "z_km",
-                  "type": "Real",
-                  "value": null
+                  "type": {
+                    "string_definition": "None",
+                    "type": "Real"
+                  },
+                  "value": "None"
                 }
               },
               "doc": "Local navigation frame expressed in kilometers (x=North, y=East, z=Up).",
               "name": "PositionXYZ"
-            }
+            },
+            "port_name": "PositionXYZ"
           }
         },
         {
@@ -1344,25 +1728,36 @@
           "dst_part_def": {
             "attributes": {
               "comment": {
-                "doc": null,
+                "doc": "None",
                 "name": "comment",
-                "type": "String",
+                "type": {
+                  "string_definition": "None",
+                  "type": "String"
+                },
                 "value": "uses waypoint tracking"
               },
               "waypointCount": {
-                "doc": null,
+                "doc": "None",
                 "name": "waypointCount",
-                "type": "Integer",
-                "value": 10
+                "type": {
+                  "string_definition": "None",
+                  "type": "Integer"
+                },
+                "value": "10"
               },
               "waypointX_km": {
-                "doc": null,
+                "doc": "None",
                 "name": "waypointX_km",
-                "type": "List[Real]",
+                "type": {
+                  "string_definition": "None",
+                  "type": [
+                    "Real"
+                  ]
+                },
                 "value": [
-                  0.0,
-                  10.0,
-                  20.0
+                  "0.0",
+                  "10.0",
+                  "20.0"
                 ]
               }
             },
@@ -1375,151 +1770,196 @@
                 "direction": "out",
                 "doc": "HOTAS-equivalent command stream for mission computer blending.",
                 "name": "autopilotCmd",
-                "payload": "PilotCommand",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "mode_switch": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "mode_switch",
-                      "type": "Integer",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Integer"
+                      },
+                      "value": "None"
                     },
                     "stick_pitch_norm": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "stick_pitch_norm",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "stick_roll_norm": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "stick_roll_norm",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "HOTAS-style control payload shared across control surfaces and mission computer consumers.",
                   "name": "PilotCommand"
-                }
+                },
+                "port_name": "PilotCommand"
               },
               "currentLocation": {
                 "direction": "in",
                 "doc": "Current local position from sensors",
                 "name": "currentLocation",
-                "payload": "PositionXYZ",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "x_km": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "x_km",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "y_km": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "y_km",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "z_km": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "z_km",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Local navigation frame expressed in kilometers (x=North, y=East, z=Up).",
                   "name": "PositionXYZ"
-                }
+                },
+                "port_name": "PositionXYZ"
               },
               "currentOrientation": {
                 "direction": "in",
                 "doc": "Current attitude from sensors.",
                 "name": "currentOrientation",
-                "payload": "OrientationEuler",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "pitch_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "pitch_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "roll_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "roll_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "yaw_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "yaw_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Air vehicle orientation expressed as Euler angles in degrees.",
                   "name": "OrientationEuler"
-                }
+                },
+                "port_name": "OrientationEuler"
               },
               "feedbackBus": {
                 "direction": "in",
                 "doc": "Mission-computer flight status back into autopilot.",
                 "name": "feedbackBus",
-                "payload": "FlightStatusPacket",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "airspeed_mps": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "airspeed_mps",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "angle_of_attack_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "angle_of_attack_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "health_code": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "health_code",
-                      "type": "Integer",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Integer"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Mission computer status feedback consumed by autonomy and analysis models.",
                   "name": "FlightStatusPacket"
-                }
+                },
+                "port_name": "FlightStatusPacket"
               },
               "missionStatus": {
                 "direction": "out",
                 "doc": "Waypoint progression for logging and verification.",
                 "name": "missionStatus",
-                "payload": "MissionStatus",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "complete": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "complete",
-                      "type": "Boolean",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Boolean"
+                      },
+                      "value": "None"
                     },
                     "total_waypoints": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "total_waypoints",
-                      "type": "Integer",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Integer"
+                      },
+                      "value": "None"
                     },
                     "waypoint_index": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "waypoint_index",
-                      "type": "Integer",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Integer"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Waypoint-tracking status produced by the autopilot for logging and requirement evaluation.",
                   "name": "MissionStatus"
-                }
+                },
+                "port_name": "MissionStatus"
               }
             }
           },
@@ -1528,31 +1968,40 @@
             "direction": "in",
             "doc": "Mission-computer flight status back into autopilot.",
             "name": "feedbackBus",
-            "payload": "FlightStatusPacket",
-            "payload_def": {
+            "port_def": {
               "attributes": {
                 "airspeed_mps": {
-                  "doc": null,
+                  "doc": "None",
                   "name": "airspeed_mps",
-                  "type": "Real",
-                  "value": null
+                  "type": {
+                    "string_definition": "None",
+                    "type": "Real"
+                  },
+                  "value": "None"
                 },
                 "angle_of_attack_deg": {
-                  "doc": null,
+                  "doc": "None",
                   "name": "angle_of_attack_deg",
-                  "type": "Real",
-                  "value": null
+                  "type": {
+                    "string_definition": "None",
+                    "type": "Real"
+                  },
+                  "value": "None"
                 },
                 "health_code": {
-                  "doc": null,
+                  "doc": "None",
                   "name": "health_code",
-                  "type": "Integer",
-                  "value": null
+                  "type": {
+                    "string_definition": "None",
+                    "type": "Integer"
+                  },
+                  "value": "None"
                 }
               },
               "doc": "Mission computer status feedback consumed by autonomy and analysis models.",
               "name": "FlightStatusPacket"
-            }
+            },
+            "port_name": "FlightStatusPacket"
           },
           "src_component": "environment",
           "src_part_def": {
@@ -1564,156 +2013,201 @@
             "ports": {
               "direction_command": {
                 "direction": "in",
-                "doc": null,
+                "doc": "None",
                 "name": "direction_command",
-                "payload": "OrientationEuler",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "pitch_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "pitch_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "roll_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "roll_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "yaw_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "yaw_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Air vehicle orientation expressed as Euler angles in degrees.",
                   "name": "OrientationEuler"
-                }
+                },
+                "port_name": "OrientationEuler"
               },
               "flight_status": {
                 "direction": "out",
-                "doc": null,
+                "doc": "None",
                 "name": "flight_status",
-                "payload": "FlightStatusPacket",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "airspeed_mps": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "airspeed_mps",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "angle_of_attack_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "angle_of_attack_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "health_code": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "health_code",
-                      "type": "Integer",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Integer"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Mission computer status feedback consumed by autonomy and analysis models.",
                   "name": "FlightStatusPacket"
-                }
+                },
+                "port_name": "FlightStatusPacket"
               },
               "location": {
                 "direction": "out",
-                "doc": null,
+                "doc": "None",
                 "name": "location",
-                "payload": "PositionXYZ",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "x_km": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "x_km",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "y_km": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "y_km",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "z_km": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "z_km",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Local navigation frame expressed in kilometers (x=North, y=East, z=Up).",
                   "name": "PositionXYZ"
-                }
+                },
+                "port_name": "PositionXYZ"
               },
               "orientation": {
                 "direction": "out",
                 "doc": "Feedback for simulated sensors",
                 "name": "orientation",
-                "payload": "OrientationEuler",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "pitch_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "pitch_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "roll_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "roll_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "yaw_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "yaw_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Air vehicle orientation expressed as Euler angles in degrees.",
                   "name": "OrientationEuler"
-                }
+                },
+                "port_name": "OrientationEuler"
               }
             }
           },
           "src_port": "flight_status",
           "src_port_def": {
             "direction": "out",
-            "doc": null,
+            "doc": "None",
             "name": "flight_status",
-            "payload": "FlightStatusPacket",
-            "payload_def": {
+            "port_def": {
               "attributes": {
                 "airspeed_mps": {
-                  "doc": null,
+                  "doc": "None",
                   "name": "airspeed_mps",
-                  "type": "Real",
-                  "value": null
+                  "type": {
+                    "string_definition": "None",
+                    "type": "Real"
+                  },
+                  "value": "None"
                 },
                 "angle_of_attack_deg": {
-                  "doc": null,
+                  "doc": "None",
                   "name": "angle_of_attack_deg",
-                  "type": "Real",
-                  "value": null
+                  "type": {
+                    "string_definition": "None",
+                    "type": "Real"
+                  },
+                  "value": "None"
                 },
                 "health_code": {
-                  "doc": null,
+                  "doc": "None",
                   "name": "health_code",
-                  "type": "Integer",
-                  "value": null
+                  "type": {
+                    "string_definition": "None",
+                    "type": "Integer"
+                  },
+                  "value": "None"
                 }
               },
               "doc": "Mission computer status feedback consumed by autonomy and analysis models.",
               "name": "FlightStatusPacket"
-            }
+            },
+            "port_name": "FlightStatusPacket"
           }
         }
       ],
@@ -1721,31 +2215,41 @@
       "name": "AircraftComposition",
       "parts": {
         "autopilot": {
-          "doc": null,
+          "doc": "None",
           "name": "autopilot",
-          "target": "AutopilotModule",
-          "target_def": {
+          "part_def": {
             "attributes": {
               "comment": {
-                "doc": null,
+                "doc": "None",
                 "name": "comment",
-                "type": "String",
+                "type": {
+                  "string_definition": "None",
+                  "type": "String"
+                },
                 "value": "uses waypoint tracking"
               },
               "waypointCount": {
-                "doc": null,
+                "doc": "None",
                 "name": "waypointCount",
-                "type": "Integer",
-                "value": 10
+                "type": {
+                  "string_definition": "None",
+                  "type": "Integer"
+                },
+                "value": "10"
               },
               "waypointX_km": {
-                "doc": null,
+                "doc": "None",
                 "name": "waypointX_km",
-                "type": "List[Real]",
+                "type": {
+                  "string_definition": "None",
+                  "type": [
+                    "Real"
+                  ]
+                },
                 "value": [
-                  0.0,
-                  10.0,
-                  20.0
+                  "0.0",
+                  "10.0",
+                  "20.0"
                 ]
               }
             },
@@ -1758,160 +2262,205 @@
                 "direction": "out",
                 "doc": "HOTAS-equivalent command stream for mission computer blending.",
                 "name": "autopilotCmd",
-                "payload": "PilotCommand",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "mode_switch": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "mode_switch",
-                      "type": "Integer",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Integer"
+                      },
+                      "value": "None"
                     },
                     "stick_pitch_norm": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "stick_pitch_norm",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "stick_roll_norm": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "stick_roll_norm",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "HOTAS-style control payload shared across control surfaces and mission computer consumers.",
                   "name": "PilotCommand"
-                }
+                },
+                "port_name": "PilotCommand"
               },
               "currentLocation": {
                 "direction": "in",
                 "doc": "Current local position from sensors",
                 "name": "currentLocation",
-                "payload": "PositionXYZ",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "x_km": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "x_km",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "y_km": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "y_km",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "z_km": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "z_km",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Local navigation frame expressed in kilometers (x=North, y=East, z=Up).",
                   "name": "PositionXYZ"
-                }
+                },
+                "port_name": "PositionXYZ"
               },
               "currentOrientation": {
                 "direction": "in",
                 "doc": "Current attitude from sensors.",
                 "name": "currentOrientation",
-                "payload": "OrientationEuler",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "pitch_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "pitch_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "roll_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "roll_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "yaw_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "yaw_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Air vehicle orientation expressed as Euler angles in degrees.",
                   "name": "OrientationEuler"
-                }
+                },
+                "port_name": "OrientationEuler"
               },
               "feedbackBus": {
                 "direction": "in",
                 "doc": "Mission-computer flight status back into autopilot.",
                 "name": "feedbackBus",
-                "payload": "FlightStatusPacket",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "airspeed_mps": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "airspeed_mps",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "angle_of_attack_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "angle_of_attack_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "health_code": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "health_code",
-                      "type": "Integer",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Integer"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Mission computer status feedback consumed by autonomy and analysis models.",
                   "name": "FlightStatusPacket"
-                }
+                },
+                "port_name": "FlightStatusPacket"
               },
               "missionStatus": {
                 "direction": "out",
                 "doc": "Waypoint progression for logging and verification.",
                 "name": "missionStatus",
-                "payload": "MissionStatus",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "complete": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "complete",
-                      "type": "Boolean",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Boolean"
+                      },
+                      "value": "None"
                     },
                     "total_waypoints": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "total_waypoints",
-                      "type": "Integer",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Integer"
+                      },
+                      "value": "None"
                     },
                     "waypoint_index": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "waypoint_index",
-                      "type": "Integer",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Integer"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Waypoint-tracking status produced by the autopilot for logging and requirement evaluation.",
                   "name": "MissionStatus"
-                }
+                },
+                "port_name": "MissionStatus"
               }
             }
-          }
+          },
+          "part_name": "AutopilotModule"
         },
         "environment": {
-          "doc": null,
+          "doc": "None",
           "name": "environment",
-          "target": "Environment",
-          "target_def": {
+          "part_def": {
             "attributes": {},
             "connections": [],
             "doc": "Tracking position and velocities of the aircraft and feeds the sensors",
@@ -1920,132 +2469,168 @@
             "ports": {
               "direction_command": {
                 "direction": "in",
-                "doc": null,
+                "doc": "None",
                 "name": "direction_command",
-                "payload": "OrientationEuler",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "pitch_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "pitch_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "roll_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "roll_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "yaw_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "yaw_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Air vehicle orientation expressed as Euler angles in degrees.",
                   "name": "OrientationEuler"
-                }
+                },
+                "port_name": "OrientationEuler"
               },
               "flight_status": {
                 "direction": "out",
-                "doc": null,
+                "doc": "None",
                 "name": "flight_status",
-                "payload": "FlightStatusPacket",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "airspeed_mps": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "airspeed_mps",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "angle_of_attack_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "angle_of_attack_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "health_code": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "health_code",
-                      "type": "Integer",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Integer"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Mission computer status feedback consumed by autonomy and analysis models.",
                   "name": "FlightStatusPacket"
-                }
+                },
+                "port_name": "FlightStatusPacket"
               },
               "location": {
                 "direction": "out",
-                "doc": null,
+                "doc": "None",
                 "name": "location",
-                "payload": "PositionXYZ",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "x_km": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "x_km",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "y_km": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "y_km",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "z_km": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "z_km",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Local navigation frame expressed in kilometers (x=North, y=East, z=Up).",
                   "name": "PositionXYZ"
-                }
+                },
+                "port_name": "PositionXYZ"
               },
               "orientation": {
                 "direction": "out",
                 "doc": "Feedback for simulated sensors",
                 "name": "orientation",
-                "payload": "OrientationEuler",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "pitch_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "pitch_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "roll_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "roll_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "yaw_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "yaw_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Air vehicle orientation expressed as Euler angles in degrees.",
                   "name": "OrientationEuler"
-                }
+                },
+                "port_name": "OrientationEuler"
               }
             }
-          }
+          },
+          "part_name": "Environment"
         },
         "missionComputer": {
-          "doc": null,
+          "doc": "None",
           "name": "missionComputer",
-          "target": "MissionComputer",
-          "target_def": {
+          "part_def": {
             "attributes": {},
             "connections": [],
             "doc": "F-16C/D mission computer blending pilot HOTAS inputs with fly-by-wire control laws and stores management.",
@@ -2056,64 +2641,83 @@
                 "direction": "in",
                 "doc": "Autopilot command bundle using same HOTAS signal structure.",
                 "name": "autopilotInput",
-                "payload": "PilotCommand",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "mode_switch": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "mode_switch",
-                      "type": "Integer",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Integer"
+                      },
+                      "value": "None"
                     },
                     "stick_pitch_norm": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "stick_pitch_norm",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "stick_roll_norm": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "stick_roll_norm",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "HOTAS-style control payload shared across control surfaces and mission computer consumers.",
                   "name": "PilotCommand"
-                }
+                },
+                "port_name": "PilotCommand"
               },
               "direction_command": {
                 "direction": "out",
                 "doc": "Command how to alter the current velocity vector, pith, yaw, roll",
                 "name": "direction_command",
-                "payload": "OrientationEuler",
-                "payload_def": {
+                "port_def": {
                   "attributes": {
                     "pitch_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "pitch_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "roll_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "roll_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     },
                     "yaw_deg": {
-                      "doc": null,
+                      "doc": "None",
                       "name": "yaw_deg",
-                      "type": "Real",
-                      "value": null
+                      "type": {
+                        "string_definition": "None",
+                        "type": "Real"
+                      },
+                      "value": "None"
                     }
                   },
                   "doc": "Air vehicle orientation expressed as Euler angles in degrees.",
                   "name": "OrientationEuler"
-                }
+                },
+                "port_name": "OrientationEuler"
               }
             }
-          }
+          },
+          "part_name": "MissionComputer"
         }
       },
       "ports": {}
@@ -2121,25 +2725,36 @@
     "AutopilotModule": {
       "attributes": {
         "comment": {
-          "doc": null,
+          "doc": "None",
           "name": "comment",
-          "type": "String",
+          "type": {
+            "string_definition": "None",
+            "type": "String"
+          },
           "value": "uses waypoint tracking"
         },
         "waypointCount": {
-          "doc": null,
+          "doc": "None",
           "name": "waypointCount",
-          "type": "Integer",
-          "value": 10
+          "type": {
+            "string_definition": "None",
+            "type": "Integer"
+          },
+          "value": "10"
         },
         "waypointX_km": {
-          "doc": null,
+          "doc": "None",
           "name": "waypointX_km",
-          "type": "List[Real]",
+          "type": {
+            "string_definition": "None",
+            "type": [
+              "Real"
+            ]
+          },
           "value": [
-            0.0,
-            10.0,
-            20.0
+            "0.0",
+            "10.0",
+            "20.0"
           ]
         }
       },
@@ -2152,151 +2767,196 @@
           "direction": "out",
           "doc": "HOTAS-equivalent command stream for mission computer blending.",
           "name": "autopilotCmd",
-          "payload": "PilotCommand",
-          "payload_def": {
+          "port_def": {
             "attributes": {
               "mode_switch": {
-                "doc": null,
+                "doc": "None",
                 "name": "mode_switch",
-                "type": "Integer",
-                "value": null
+                "type": {
+                  "string_definition": "None",
+                  "type": "Integer"
+                },
+                "value": "None"
               },
               "stick_pitch_norm": {
-                "doc": null,
+                "doc": "None",
                 "name": "stick_pitch_norm",
-                "type": "Real",
-                "value": null
+                "type": {
+                  "string_definition": "None",
+                  "type": "Real"
+                },
+                "value": "None"
               },
               "stick_roll_norm": {
-                "doc": null,
+                "doc": "None",
                 "name": "stick_roll_norm",
-                "type": "Real",
-                "value": null
+                "type": {
+                  "string_definition": "None",
+                  "type": "Real"
+                },
+                "value": "None"
               }
             },
             "doc": "HOTAS-style control payload shared across control surfaces and mission computer consumers.",
             "name": "PilotCommand"
-          }
+          },
+          "port_name": "PilotCommand"
         },
         "currentLocation": {
           "direction": "in",
           "doc": "Current local position from sensors",
           "name": "currentLocation",
-          "payload": "PositionXYZ",
-          "payload_def": {
+          "port_def": {
             "attributes": {
               "x_km": {
-                "doc": null,
+                "doc": "None",
                 "name": "x_km",
-                "type": "Real",
-                "value": null
+                "type": {
+                  "string_definition": "None",
+                  "type": "Real"
+                },
+                "value": "None"
               },
               "y_km": {
-                "doc": null,
+                "doc": "None",
                 "name": "y_km",
-                "type": "Real",
-                "value": null
+                "type": {
+                  "string_definition": "None",
+                  "type": "Real"
+                },
+                "value": "None"
               },
               "z_km": {
-                "doc": null,
+                "doc": "None",
                 "name": "z_km",
-                "type": "Real",
-                "value": null
+                "type": {
+                  "string_definition": "None",
+                  "type": "Real"
+                },
+                "value": "None"
               }
             },
             "doc": "Local navigation frame expressed in kilometers (x=North, y=East, z=Up).",
             "name": "PositionXYZ"
-          }
+          },
+          "port_name": "PositionXYZ"
         },
         "currentOrientation": {
           "direction": "in",
           "doc": "Current attitude from sensors.",
           "name": "currentOrientation",
-          "payload": "OrientationEuler",
-          "payload_def": {
+          "port_def": {
             "attributes": {
               "pitch_deg": {
-                "doc": null,
+                "doc": "None",
                 "name": "pitch_deg",
-                "type": "Real",
-                "value": null
+                "type": {
+                  "string_definition": "None",
+                  "type": "Real"
+                },
+                "value": "None"
               },
               "roll_deg": {
-                "doc": null,
+                "doc": "None",
                 "name": "roll_deg",
-                "type": "Real",
-                "value": null
+                "type": {
+                  "string_definition": "None",
+                  "type": "Real"
+                },
+                "value": "None"
               },
               "yaw_deg": {
-                "doc": null,
+                "doc": "None",
                 "name": "yaw_deg",
-                "type": "Real",
-                "value": null
+                "type": {
+                  "string_definition": "None",
+                  "type": "Real"
+                },
+                "value": "None"
               }
             },
             "doc": "Air vehicle orientation expressed as Euler angles in degrees.",
             "name": "OrientationEuler"
-          }
+          },
+          "port_name": "OrientationEuler"
         },
         "feedbackBus": {
           "direction": "in",
           "doc": "Mission-computer flight status back into autopilot.",
           "name": "feedbackBus",
-          "payload": "FlightStatusPacket",
-          "payload_def": {
+          "port_def": {
             "attributes": {
               "airspeed_mps": {
-                "doc": null,
+                "doc": "None",
                 "name": "airspeed_mps",
-                "type": "Real",
-                "value": null
+                "type": {
+                  "string_definition": "None",
+                  "type": "Real"
+                },
+                "value": "None"
               },
               "angle_of_attack_deg": {
-                "doc": null,
+                "doc": "None",
                 "name": "angle_of_attack_deg",
-                "type": "Real",
-                "value": null
+                "type": {
+                  "string_definition": "None",
+                  "type": "Real"
+                },
+                "value": "None"
               },
               "health_code": {
-                "doc": null,
+                "doc": "None",
                 "name": "health_code",
-                "type": "Integer",
-                "value": null
+                "type": {
+                  "string_definition": "None",
+                  "type": "Integer"
+                },
+                "value": "None"
               }
             },
             "doc": "Mission computer status feedback consumed by autonomy and analysis models.",
             "name": "FlightStatusPacket"
-          }
+          },
+          "port_name": "FlightStatusPacket"
         },
         "missionStatus": {
           "direction": "out",
           "doc": "Waypoint progression for logging and verification.",
           "name": "missionStatus",
-          "payload": "MissionStatus",
-          "payload_def": {
+          "port_def": {
             "attributes": {
               "complete": {
-                "doc": null,
+                "doc": "None",
                 "name": "complete",
-                "type": "Boolean",
-                "value": null
+                "type": {
+                  "string_definition": "None",
+                  "type": "Boolean"
+                },
+                "value": "None"
               },
               "total_waypoints": {
-                "doc": null,
+                "doc": "None",
                 "name": "total_waypoints",
-                "type": "Integer",
-                "value": null
+                "type": {
+                  "string_definition": "None",
+                  "type": "Integer"
+                },
+                "value": "None"
               },
               "waypoint_index": {
-                "doc": null,
+                "doc": "None",
                 "name": "waypoint_index",
-                "type": "Integer",
-                "value": null
+                "type": {
+                  "string_definition": "None",
+                  "type": "Integer"
+                },
+                "value": "None"
               }
             },
             "doc": "Waypoint-tracking status produced by the autopilot for logging and requirement evaluation.",
             "name": "MissionStatus"
-          }
+          },
+          "port_name": "MissionStatus"
         }
       }
     },
@@ -2309,123 +2969,159 @@
       "ports": {
         "direction_command": {
           "direction": "in",
-          "doc": null,
+          "doc": "None",
           "name": "direction_command",
-          "payload": "OrientationEuler",
-          "payload_def": {
+          "port_def": {
             "attributes": {
               "pitch_deg": {
-                "doc": null,
+                "doc": "None",
                 "name": "pitch_deg",
-                "type": "Real",
-                "value": null
+                "type": {
+                  "string_definition": "None",
+                  "type": "Real"
+                },
+                "value": "None"
               },
               "roll_deg": {
-                "doc": null,
+                "doc": "None",
                 "name": "roll_deg",
-                "type": "Real",
-                "value": null
+                "type": {
+                  "string_definition": "None",
+                  "type": "Real"
+                },
+                "value": "None"
               },
               "yaw_deg": {
-                "doc": null,
+                "doc": "None",
                 "name": "yaw_deg",
-                "type": "Real",
-                "value": null
+                "type": {
+                  "string_definition": "None",
+                  "type": "Real"
+                },
+                "value": "None"
               }
             },
             "doc": "Air vehicle orientation expressed as Euler angles in degrees.",
             "name": "OrientationEuler"
-          }
+          },
+          "port_name": "OrientationEuler"
         },
         "flight_status": {
           "direction": "out",
-          "doc": null,
+          "doc": "None",
           "name": "flight_status",
-          "payload": "FlightStatusPacket",
-          "payload_def": {
+          "port_def": {
             "attributes": {
               "airspeed_mps": {
-                "doc": null,
+                "doc": "None",
                 "name": "airspeed_mps",
-                "type": "Real",
-                "value": null
+                "type": {
+                  "string_definition": "None",
+                  "type": "Real"
+                },
+                "value": "None"
               },
               "angle_of_attack_deg": {
-                "doc": null,
+                "doc": "None",
                 "name": "angle_of_attack_deg",
-                "type": "Real",
-                "value": null
+                "type": {
+                  "string_definition": "None",
+                  "type": "Real"
+                },
+                "value": "None"
               },
               "health_code": {
-                "doc": null,
+                "doc": "None",
                 "name": "health_code",
-                "type": "Integer",
-                "value": null
+                "type": {
+                  "string_definition": "None",
+                  "type": "Integer"
+                },
+                "value": "None"
               }
             },
             "doc": "Mission computer status feedback consumed by autonomy and analysis models.",
             "name": "FlightStatusPacket"
-          }
+          },
+          "port_name": "FlightStatusPacket"
         },
         "location": {
           "direction": "out",
-          "doc": null,
+          "doc": "None",
           "name": "location",
-          "payload": "PositionXYZ",
-          "payload_def": {
+          "port_def": {
             "attributes": {
               "x_km": {
-                "doc": null,
+                "doc": "None",
                 "name": "x_km",
-                "type": "Real",
-                "value": null
+                "type": {
+                  "string_definition": "None",
+                  "type": "Real"
+                },
+                "value": "None"
               },
               "y_km": {
-                "doc": null,
+                "doc": "None",
                 "name": "y_km",
-                "type": "Real",
-                "value": null
+                "type": {
+                  "string_definition": "None",
+                  "type": "Real"
+                },
+                "value": "None"
               },
               "z_km": {
-                "doc": null,
+                "doc": "None",
                 "name": "z_km",
-                "type": "Real",
-                "value": null
+                "type": {
+                  "string_definition": "None",
+                  "type": "Real"
+                },
+                "value": "None"
               }
             },
             "doc": "Local navigation frame expressed in kilometers (x=North, y=East, z=Up).",
             "name": "PositionXYZ"
-          }
+          },
+          "port_name": "PositionXYZ"
         },
         "orientation": {
           "direction": "out",
           "doc": "Feedback for simulated sensors",
           "name": "orientation",
-          "payload": "OrientationEuler",
-          "payload_def": {
+          "port_def": {
             "attributes": {
               "pitch_deg": {
-                "doc": null,
+                "doc": "None",
                 "name": "pitch_deg",
-                "type": "Real",
-                "value": null
+                "type": {
+                  "string_definition": "None",
+                  "type": "Real"
+                },
+                "value": "None"
               },
               "roll_deg": {
-                "doc": null,
+                "doc": "None",
                 "name": "roll_deg",
-                "type": "Real",
-                "value": null
+                "type": {
+                  "string_definition": "None",
+                  "type": "Real"
+                },
+                "value": "None"
               },
               "yaw_deg": {
-                "doc": null,
+                "doc": "None",
                 "name": "yaw_deg",
-                "type": "Real",
-                "value": null
+                "type": {
+                  "string_definition": "None",
+                  "type": "Real"
+                },
+                "value": "None"
               }
             },
             "doc": "Air vehicle orientation expressed as Euler angles in degrees.",
             "name": "OrientationEuler"
-          }
+          },
+          "port_name": "OrientationEuler"
         }
       }
     },
@@ -2440,61 +3136,79 @@
           "direction": "in",
           "doc": "Autopilot command bundle using same HOTAS signal structure.",
           "name": "autopilotInput",
-          "payload": "PilotCommand",
-          "payload_def": {
+          "port_def": {
             "attributes": {
               "mode_switch": {
-                "doc": null,
+                "doc": "None",
                 "name": "mode_switch",
-                "type": "Integer",
-                "value": null
+                "type": {
+                  "string_definition": "None",
+                  "type": "Integer"
+                },
+                "value": "None"
               },
               "stick_pitch_norm": {
-                "doc": null,
+                "doc": "None",
                 "name": "stick_pitch_norm",
-                "type": "Real",
-                "value": null
+                "type": {
+                  "string_definition": "None",
+                  "type": "Real"
+                },
+                "value": "None"
               },
               "stick_roll_norm": {
-                "doc": null,
+                "doc": "None",
                 "name": "stick_roll_norm",
-                "type": "Real",
-                "value": null
+                "type": {
+                  "string_definition": "None",
+                  "type": "Real"
+                },
+                "value": "None"
               }
             },
             "doc": "HOTAS-style control payload shared across control surfaces and mission computer consumers.",
             "name": "PilotCommand"
-          }
+          },
+          "port_name": "PilotCommand"
         },
         "direction_command": {
           "direction": "out",
           "doc": "Command how to alter the current velocity vector, pith, yaw, roll",
           "name": "direction_command",
-          "payload": "OrientationEuler",
-          "payload_def": {
+          "port_def": {
             "attributes": {
               "pitch_deg": {
-                "doc": null,
+                "doc": "None",
                 "name": "pitch_deg",
-                "type": "Real",
-                "value": null
+                "type": {
+                  "string_definition": "None",
+                  "type": "Real"
+                },
+                "value": "None"
               },
               "roll_deg": {
-                "doc": null,
+                "doc": "None",
                 "name": "roll_deg",
-                "type": "Real",
-                "value": null
+                "type": {
+                  "string_definition": "None",
+                  "type": "Real"
+                },
+                "value": "None"
               },
               "yaw_deg": {
-                "doc": null,
+                "doc": "None",
                 "name": "yaw_deg",
-                "type": "Real",
-                "value": null
+                "type": {
+                  "string_definition": "None",
+                  "type": "Real"
+                },
+                "value": "None"
               }
             },
             "doc": "Air vehicle orientation expressed as Euler angles in degrees.",
             "name": "OrientationEuler"
-          }
+          },
+          "port_name": "OrientationEuler"
         }
       }
     }
@@ -2503,22 +3217,31 @@
     "FlightStatusPacket": {
       "attributes": {
         "airspeed_mps": {
-          "doc": null,
+          "doc": "None",
           "name": "airspeed_mps",
-          "type": "Real",
-          "value": null
+          "type": {
+            "string_definition": "None",
+            "type": "Real"
+          },
+          "value": "None"
         },
         "angle_of_attack_deg": {
-          "doc": null,
+          "doc": "None",
           "name": "angle_of_attack_deg",
-          "type": "Real",
-          "value": null
+          "type": {
+            "string_definition": "None",
+            "type": "Real"
+          },
+          "value": "None"
         },
         "health_code": {
-          "doc": null,
+          "doc": "None",
           "name": "health_code",
-          "type": "Integer",
-          "value": null
+          "type": {
+            "string_definition": "None",
+            "type": "Integer"
+          },
+          "value": "None"
         }
       },
       "doc": "Mission computer status feedback consumed by autonomy and analysis models.",
@@ -2527,22 +3250,31 @@
     "MissionStatus": {
       "attributes": {
         "complete": {
-          "doc": null,
+          "doc": "None",
           "name": "complete",
-          "type": "Boolean",
-          "value": null
+          "type": {
+            "string_definition": "None",
+            "type": "Boolean"
+          },
+          "value": "None"
         },
         "total_waypoints": {
-          "doc": null,
+          "doc": "None",
           "name": "total_waypoints",
-          "type": "Integer",
-          "value": null
+          "type": {
+            "string_definition": "None",
+            "type": "Integer"
+          },
+          "value": "None"
         },
         "waypoint_index": {
-          "doc": null,
+          "doc": "None",
           "name": "waypoint_index",
-          "type": "Integer",
-          "value": null
+          "type": {
+            "string_definition": "None",
+            "type": "Integer"
+          },
+          "value": "None"
         }
       },
       "doc": "Waypoint-tracking status produced by the autopilot for logging and requirement evaluation.",
@@ -2551,22 +3283,31 @@
     "OrientationEuler": {
       "attributes": {
         "pitch_deg": {
-          "doc": null,
+          "doc": "None",
           "name": "pitch_deg",
-          "type": "Real",
-          "value": null
+          "type": {
+            "string_definition": "None",
+            "type": "Real"
+          },
+          "value": "None"
         },
         "roll_deg": {
-          "doc": null,
+          "doc": "None",
           "name": "roll_deg",
-          "type": "Real",
-          "value": null
+          "type": {
+            "string_definition": "None",
+            "type": "Real"
+          },
+          "value": "None"
         },
         "yaw_deg": {
-          "doc": null,
+          "doc": "None",
           "name": "yaw_deg",
-          "type": "Real",
-          "value": null
+          "type": {
+            "string_definition": "None",
+            "type": "Real"
+          },
+          "value": "None"
         }
       },
       "doc": "Air vehicle orientation expressed as Euler angles in degrees.",
@@ -2575,22 +3316,31 @@
     "PilotCommand": {
       "attributes": {
         "mode_switch": {
-          "doc": null,
+          "doc": "None",
           "name": "mode_switch",
-          "type": "Integer",
-          "value": null
+          "type": {
+            "string_definition": "None",
+            "type": "Integer"
+          },
+          "value": "None"
         },
         "stick_pitch_norm": {
-          "doc": null,
+          "doc": "None",
           "name": "stick_pitch_norm",
-          "type": "Real",
-          "value": null
+          "type": {
+            "string_definition": "None",
+            "type": "Real"
+          },
+          "value": "None"
         },
         "stick_roll_norm": {
-          "doc": null,
+          "doc": "None",
           "name": "stick_roll_norm",
-          "type": "Real",
-          "value": null
+          "type": {
+            "string_definition": "None",
+            "type": "Real"
+          },
+          "value": "None"
         }
       },
       "doc": "HOTAS-style control payload shared across control surfaces and mission computer consumers.",
@@ -2599,22 +3349,31 @@
     "PositionXYZ": {
       "attributes": {
         "x_km": {
-          "doc": null,
+          "doc": "None",
           "name": "x_km",
-          "type": "Real",
-          "value": null
+          "type": {
+            "string_definition": "None",
+            "type": "Real"
+          },
+          "value": "None"
         },
         "y_km": {
-          "doc": null,
+          "doc": "None",
           "name": "y_km",
-          "type": "Real",
-          "value": null
+          "type": {
+            "string_definition": "None",
+            "type": "Real"
+          },
+          "value": "None"
         },
         "z_km": {
-          "doc": null,
+          "doc": "None",
           "name": "z_km",
-          "type": "Real",
-          "value": null
+          "type": {
+            "string_definition": "None",
+            "type": "Real"
+          },
+          "value": "None"
         }
       },
       "doc": "Local navigation frame expressed in kilometers (x=North, y=East, z=Up).",
