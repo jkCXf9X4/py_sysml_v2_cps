@@ -119,6 +119,13 @@ class SysMLAttribute:
     def is_list(self):
         return isinstance(self.value, (list, tuple))
 
+    def enumerator(self, start = 0):
+        v = self.value
+        if not self.is_list():
+            v = [v]
+        return enumerate(v, start=start)
+ 
+
     @staticmethod
     def from_literal(name, value: Optional[str], doc: Optional[str]):
         value = SysMLAttribute._parse_literal(value)
