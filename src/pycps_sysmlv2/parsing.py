@@ -33,7 +33,7 @@ class SysMLFolderParser:
         if not files:
             raise FileNotFoundError(f"No .sysml files found under {self.folder}")
 
-        parts: Dict[str, SysMLPartDefinition] = {}
+        part_defs: Dict[str, SysMLPartDefinition] = {}
         port_defs: Dict[str, SysMLPortDefinition] = {}
         requirements: List[SysMLRequirement] = []
         package_name: Optional[str] = None
@@ -49,9 +49,9 @@ class SysMLFolderParser:
                 )
 
             for name, block in _extract_named_blocks(body, "part def"):
-                if name in parts:
+                if name in part_defs:
                     raise ValueError(f"Duplicate part definition for {name} in {path}")
-                parts[name] = _parse_part_block(name, block)
+                part_defs[name] = _parse_part_block(name, block)
 
             for name, block in _extract_named_blocks(body, "port def"):
                 if name in port_defs:
@@ -60,12 +60,13 @@ class SysMLFolderParser:
 
             requirements.extend(_parse_requirements(body))
 
-        _attach_port_definitions(parts, port_defs)
-        _attach_part_definitions(parts)
-        _attach_connection_definitions(parts)
+        _attach_port_definitions(part_defs, port_defs)
+        _attach_part_definitions(part_defs)
+
+        _attach_connection_definitions(part_defs, port_defs)
         return SysMLArchitecture(
             package=package_name or "Package",
-            part_definitions=parts,
+            part_definitions=part_defs,
             port_definitions=port_defs,
             requirements=requirements,
         )
@@ -269,49 +270,25 @@ def _attach_part_definitions(parts: Dict[str, SysMLPartDefinition]) -> None:
             subpart.part_def = parts.get(subpart.part_name)
 
 
-def _attach_connection_definitions(parts: Dict[str, SysMLPartDefinition]) -> None:
-    instance_to_part_def = _build_instance_to_part_definition_map(parts)
+def _attach_connection_definitions(parts: Dict[str, SysMLPartDefinition], ports: Dict[str, SysMLPortDefinition]) -> None:
+
     for part in parts.values():
-        local_instances = {
-            subpart.name: subpart.part_def for subpart in part.parts.values()
-        }
-        for connection in part.connections:
-            connection.src_part_def = (
-                parts.get(connection.src_component)
-                or local_instances.get(connection.src_component)
-                or instance_to_part_def.get(connection.src_component)
-            )
-            connection.dst_part_def = (
-                parts.get(connection.dst_component)
-                or local_instances.get(connection.dst_component)
-                or instance_to_part_def.get(connection.dst_component)
-            )
-            connection.src_port_def = _find_port_reference(
-                connection.src_part_def, connection.src_port
-            )
-            connection.dst_port_def = _find_port_reference(
-                connection.dst_part_def, connection.dst_port
-            )
+        for c in part.connections:
+            if c.src_component not in part.parts:
+                raise Exception(f"Subpart not found for connection, {part.name}:{c.src_component}")
+            if c.dst_component not in part.parts:
+                raise Exception(f"Subpart not found for connection, {part.name}:{c.dst_component}")
 
+            c.src_part_def = part.parts[c.src_component].part_def
+            c.dst_part_def = part.parts[c.dst_component].part_def
 
-def _build_instance_to_part_definition_map(
-    parts: Dict[str, SysMLPartDefinition],
-) -> Dict[str, SysMLPartDefinition]:
-    mapping: Dict[str, SysMLPartDefinition] = {}
-    for part in parts.values():
-        for subpart in part.parts.values():
-            if subpart.part_def is not None:
-                mapping[subpart.name] = subpart.part_def
-    return mapping
+            if c.src_port not in c.src_part_def.ports:
+                raise Exception(f"Port not found for connection, {c.src_part_def.name}:{c.src_port}")
+            if c.dst_port not in c.dst_part_def.ports:
+                raise Exception(f"Port not found for connection, {c.dst_part_def.name}:{c.dst_port}")
 
-
-def _find_port_reference(
-    part: Optional[SysMLPartDefinition], port_name: str
-) -> Optional[SysMLPortReference]:
-    if part is None:
-        return None
-    return part.ports.get(port_name)
-
+            c.src_port_def = c.src_part_def.ports[c.src_port].port_def
+            c.dst_port_def = c.dst_part_def.ports[c.dst_port].port_def
 
 def _iter_block_items(block: str) -> Iterator[Tuple[str, str]]:
     lines = block.splitlines()

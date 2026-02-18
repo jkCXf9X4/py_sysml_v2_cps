@@ -51,7 +51,7 @@ class SysMLType:
 
     def primitive_type(self):
         return obj_base(self.type)
-    
+
     def primitive_type_str(self):
         return self._as_string(obj_base(self.type))
 
@@ -172,8 +172,8 @@ class SysMLConnection:
     dst_port: str
     src_part_def: Optional["SysMLPartDefinition"] = None
     dst_part_def: Optional["SysMLPartDefinition"] = None
-    src_port_def: Optional["SysMLPortReference"] = None
-    dst_port_def: Optional["SysMLPortReference"] = None
+    src_port_def: Optional["SysMLPortDefinition"] = None
+    dst_port_def: Optional["SysMLPortDefinition"] = None
 
     def __str__(self) -> str:
         return json_dumps(self)
@@ -198,30 +198,15 @@ class SysMLPartDefinition:
     parts: Dict[str, SysMLPartReference] = field(default_factory=dict)
     connections: List[SysMLConnection] = field(default_factory=list)
 
-    def get_all_port_attributes(
+    def get_port_attributes(
         self,
     ) -> List[Tuple[SysMLPortReference, SysMLPortDefinition, SysMLAttribute]]:
         attributes = []
         for port in self.ports.values():
             port_def = port.port_def
             for attr in port_def.attributes.values():
-                s = (
-                    port,
-                    port_def,
-                    attr,
-                )
+                s = (port, port_def, attr)
                 attributes.append(s)
-        return attributes
-
-    def get_all_attributes(
-        self,
-    ) -> List[Tuple[str, str, SysMLAttribute]]:
-        attributes = []
-
-        for part_name, part in self.parts.items():
-            for attr_name, attr in part.part_def.attributes.items():
-                attributes.append((part_name, attr_name, attr))
-
         return attributes
 
     def __str__(self) -> str:
