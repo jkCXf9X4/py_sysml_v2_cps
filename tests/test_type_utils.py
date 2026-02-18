@@ -46,6 +46,7 @@ def test_sysml_type_from_string_maps_known_type_aliases(type_name, expected_prim
         ("FALSE", False, PrimitiveType.Boolean),
         ("42", 42, PrimitiveType.Integer),
         ("3.5", 3.5, PrimitiveType.Real),
+        ("[3.5, 7]", [3.5, 7], [PrimitiveType.Real]),
         ('"quoted"', "quoted", PrimitiveType.String),
         ("unquoted_text", "unquoted_text", PrimitiveType.String),
     ],

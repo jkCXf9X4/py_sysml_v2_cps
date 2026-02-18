@@ -6,34 +6,36 @@ import json
 import re
 from dataclasses import is_dataclass
 from pathlib import Path
-from typing import Any, Tuple
+from typing import Any, Tuple, List
 
 from enum import StrEnum, auto
 
-def to_jsonable(value: Any) -> Any:
-    # Class
-    if isinstance(value, StrEnum): # Must be first to not recurse down into the enum class
-        return str(value)
-    if is_dataclass(value):
-        return {
-            field_name: to_jsonable(getattr(value, field_name))
-            for field_name in value.__dataclass_fields__
-        }
-    if hasattr(value, "__dict__"):
-        return {str(key): to_jsonable(val) for key, val in vars(value).items()}
+def to_jsonable(value: Any, suppress_list : List[Any] | None) -> Any:
+    if suppress_list is not None:
+        if value in suppress_list:
+            return "__ref__"
 
-    # Vaiables
+    # Variables
     if isinstance(value, dict):
-        return {str(key): to_jsonable(val) for key, val in value.items()}
+        return {str(key): to_jsonable(val, suppress_list) for key, val in value.items()}
     if isinstance(value, (list, tuple, set)):
-        return [to_jsonable(item) for item in value]
+        return [to_jsonable(item, suppress_list) for item in value]
     if isinstance(value, Path):
         return str(value)
+    if isinstance(value, StrEnum): # Must be first to not recurse down into the enum class
+        return str(value)
+
+    # Class
+    if hasattr(value, "__dict__"):
+        if suppress_list is not None:
+            suppress_list.append(value)
+        return {str(key): to_jsonable(val, suppress_list) for key, val in vars(value).items()}
+
     return str(value)
 
 
-def json_dumps(value: Any) -> str:
-    return json.dumps(to_jsonable(value), indent=2, sort_keys=True)
+def json_dumps(value: Any, suppress_list = None) -> str:
+    return json.dumps(to_jsonable(value, suppress_list), indent=2, sort_keys=True)
 
 
 def collect_block(text: str, brace_start: int) -> Tuple[str, int]:

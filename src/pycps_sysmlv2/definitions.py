@@ -3,10 +3,10 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional
 
 from .parser_utils import json_dumps
-from .utils import obj_base, obj_iterator
+from .utils import obj_base
 
 from enum import StrEnum, auto
 
@@ -88,6 +88,7 @@ class SysMLType:
 
     @staticmethod
     def from_string(string : str) -> "SysMLType":
+        # List types are not supported
         striped = string.strip().lower()
         if striped in SYSML_TYPE_MAP:
             return SysMLType(SYSML_TYPE_MAP[striped])

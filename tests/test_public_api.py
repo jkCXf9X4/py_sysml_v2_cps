@@ -7,6 +7,8 @@ from pycps_sysmlv2 import (
 )
 from pycps_sysmlv2.definitions import PrimitiveType, SysMLType
 
+from pycps_sysmlv2.parser_utils import json_dumps
+
 
 FIXTURE_ARCH_DIR = Path(__file__).resolve().parent / "fixtures" / "aircraft_subset"
 FIXTURE_REFERENCE_JSON = FIXTURE_ARCH_DIR / "architecture_reference.json"
@@ -33,7 +35,7 @@ def test_architecture_loader_from_fixture_directory():
     assert len(architecture.requirements) == 2
 
     # Keep a checked-in JSON snapshot of the parsed fixture for easy diffing.
-    FIXTURE_REFERENCE_JSON.write_text(str(architecture))
+    FIXTURE_REFERENCE_JSON.write_text(json_dumps(architecture, []))
 
 
 def test_architecture_loader_from_fixture_file():
