@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 from .parser_utils import json_dumps
 from .utils import obj_base
@@ -22,6 +22,7 @@ class PrimitiveType(StrEnum):
     Null = "Null"
     Unknown = auto()
 
+
 SYSML_TYPE_MAP = {
     "real": PrimitiveType.Real,
     "float": PrimitiveType.Real,
@@ -39,6 +40,7 @@ SYSML_TYPE_MAP = {
     "string": PrimitiveType.String,
 }
 
+
 class SysMLType:
     def __init__(self, type: PrimitiveType, string_definition: Optional[str] = None):
         self.type = type
@@ -49,6 +51,9 @@ class SysMLType:
 
     def primitive_type(self):
         return obj_base(self.type)
+    
+    def primitive_type_str(self):
+        return self._as_string(obj_base(self.type))
 
     def as_string(self):
         return self._as_string(self.type)
@@ -87,7 +92,7 @@ class SysMLType:
                 return [SysMLType._from_value(value[0])]
 
     @staticmethod
-    def from_string(string : str) -> "SysMLType":
+    def from_string(string: str) -> "SysMLType":
         # List types are not supported
         striped = string.strip().lower()
         if striped in SYSML_TYPE_MAP:
@@ -100,7 +105,11 @@ class SysMLType:
 
 class SysMLAttribute:
     def __init__(
-        self, name: str, type: Optional[SysMLType], value: Optional[Any], doc: Optional[str]
+        self,
+        name: str,
+        type: Optional[SysMLType],
+        value: Optional[Any],
+        doc: Optional[str],
     ):
         self.name = name
         self.type = type
@@ -188,6 +197,32 @@ class SysMLPartDefinition:
     ports: Dict[str, SysMLPortReference] = field(default_factory=dict)
     parts: Dict[str, SysMLPartReference] = field(default_factory=dict)
     connections: List[SysMLConnection] = field(default_factory=list)
+
+    def get_all_port_attributes(
+        self,
+    ) -> List[Tuple[SysMLPortReference, SysMLPortDefinition, SysMLAttribute]]:
+        attributes = []
+        for port in self.ports.values():
+            port_def = port.port_def
+            for attr in port_def.attributes.values():
+                s = (
+                    port,
+                    port_def,
+                    attr,
+                )
+                attributes.append(s)
+        return attributes
+
+    def get_all_attributes(
+        self,
+    ) -> List[Tuple[str, str, SysMLAttribute]]:
+        attributes = []
+
+        for part_name, part in self.parts.items():
+            for attr_name, attr in part.part_def.attributes.items():
+                attributes.append((part_name, attr_name, attr))
+
+        return attributes
 
     def __str__(self) -> str:
         return json_dumps(self)

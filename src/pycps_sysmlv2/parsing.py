@@ -78,6 +78,13 @@ def load_architecture(folder: Path | str) -> SysMLArchitecture:
     return SysMLFolderParser(path).parse()
 
 
+def load_system(folder: Path | str, system_part: str):
+    a = load_architecture(folder)
+    if system_part not in a.part_definitions:
+        raise Exception("Part not found")
+    return a.part_definitions[system_part]
+
+
 _PACKAGE_RE = re.compile(r"package\s+([A-Za-z0-9_]+)\s*\{", re.MULTILINE)
 _CONNECTION_RE = re.compile(
     r"connect\s+([A-Za-z0-9_]+)\.([A-Za-z0-9_]+)\s+to\s+([A-Za-z0-9_]+)\.([A-Za-z0-9_]+)\s*;"
@@ -288,7 +295,7 @@ def _attach_connection_definitions(parts: Dict[str, SysMLPartDefinition]) -> Non
 
 
 def _build_instance_to_part_definition_map(
-    parts: Dict[str, SysMLPartDefinition]
+    parts: Dict[str, SysMLPartDefinition],
 ) -> Dict[str, SysMLPartDefinition]:
     mapping: Dict[str, SysMLPartDefinition] = {}
     for part in parts.values():
