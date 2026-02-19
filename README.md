@@ -17,7 +17,7 @@ It is not a full SysML v2 compiler. It targets a practical subset used in this r
 
 ## Requirements
 
-- Python 3.11 or newer
+- Python 3.10 or newer
 
 ## Install
 
@@ -90,6 +90,18 @@ Run the bundled example from this repository root:
 ```bash
 PYTHONPATH=src python3 examples/parse_architecture.py
 ```
+
+## Architecture transparency
+
+Development-facing architecture and design details are documented in:
+
+- [`docs/architecture_overview.md`](docs/architecture_overview.md)
+
+It includes:
+- Parsing pipeline and module responsibilities
+- Data model and reference-resolution strategy
+- Validation/error behavior and failure taxonomy
+- Extension points for adding syntax, validation, and diagnostics
 
 ## How parsing works
 
@@ -226,12 +238,17 @@ The parser raises explicit exceptions for common structural issues:
 - `FileNotFoundError`:
   - input folder does not exist
   - no `*.sysml` files found in folder
+- `KeyError`:
+  - `load_system(..., system_part)` requested part does not exist
 - `ValueError`:
   - missing package declaration
   - mismatched package names across files
   - duplicate `part def` or `port def` names
   - malformed `port`, `part`, or `connect` statements
   - unterminated `doc /* ... */` comment blocks
+  - unresolved `part` references to unknown part definitions
+  - unresolved `in/out port` references to unknown port definitions
+  - unresolved connection endpoint port definitions
 
 ## Scope and non-goals
 
