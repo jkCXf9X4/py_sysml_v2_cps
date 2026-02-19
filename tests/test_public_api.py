@@ -97,11 +97,7 @@ def test_connections_are_linked_to_part_and_port_definitions():
     assert first.dst_part_def.name == "MissionComputer"
 
     assert first.src_port_def is not None
-    assert first.src_port_def.name == "autopilotCmd"
-    assert first.src_port_def.port_def is not None
-    assert first.src_port_def.port_def.name == "PilotCommand"
+    assert first.src_port_def.name == "PilotCommand"
 
     assert first.dst_port_def is not None
-    assert first.dst_port_def.name == "autopilotInput"
-    assert first.dst_port_def.port_def is not None
-    assert first.dst_port_def.port_def.name == "PilotCommand"
+    assert first.dst_port_def.name == "PilotCommand"

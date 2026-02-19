@@ -31,7 +31,7 @@ def to_jsonable(value: Any, suppress_list : List[Any] | None) -> Any:
             suppress_list.append(value)
         return {str(key): to_jsonable(val, suppress_list) for key, val in vars(value).items()}
 
-    return str(value)
+    return value
 
 
 def json_dumps(value: Any, suppress_list = None) -> str:
