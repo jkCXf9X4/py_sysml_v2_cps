@@ -3,24 +3,23 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from enum import Enum
 from typing import Any, Dict, List, Optional, Tuple
 
 from .parser_utils import json_dumps
 from .utils import obj_base
 
-from enum import StrEnum, auto
-
 import ast
 #  Definitions
 
 
-class PrimitiveType(StrEnum):
+class PrimitiveType(str, Enum):
     Boolean = "Boolean"
     Integer = "Integer"
     Real = "Real"
     String = "String"
     Null = "Null"
-    Unknown = auto()
+    Unknown = "Unknown"
 
 
 SYSML_TYPE_MAP = {
@@ -67,6 +66,8 @@ class SysMLType:
                 return "List[]"
             else:
                 return f"List[{SysMLType._as_string(type[0])}]"
+        if isinstance(type, Enum):
+            return str(type.value)
         return str(type)
 
     @staticmethod
@@ -211,6 +212,10 @@ class SysMLPartDefinition:
         attributes = []
         for port in self.ports.values():
             port_def = port.port_def
+            if port_def is None:
+                raise ValueError(
+                    f"Port definition not resolved for {self.name}.{port.name} ({port.port_name})"
+                )
             for attr in port_def.attributes.values():
                 s = (port, port_def, attr)
                 attributes.append(s)

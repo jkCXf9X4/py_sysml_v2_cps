@@ -2,13 +2,6 @@
 
 from __future__ import annotations
 
-import ast
-from typing import Any, Optional, Tuple, List
-
-from enum import StrEnum, auto
-
-
-
 def obj_base(obj):
     if isinstance(obj, list) and obj:
         if len(obj) == 0:
@@ -22,7 +15,6 @@ def obj_iterator(values):
             yield i
     else:
         yield values
-
 
 
 

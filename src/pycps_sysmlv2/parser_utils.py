@@ -4,11 +4,9 @@ from __future__ import annotations
 
 import json
 import re
-from dataclasses import is_dataclass
+from enum import Enum
 from pathlib import Path
 from typing import Any, Tuple, List
-
-from enum import StrEnum, auto
 
 def to_jsonable(value: Any, suppress_list : List[Any] | None) -> Any:
     if suppress_list is not None:
@@ -22,8 +20,8 @@ def to_jsonable(value: Any, suppress_list : List[Any] | None) -> Any:
         return [to_jsonable(item, suppress_list) for item in value]
     if isinstance(value, Path):
         return str(value)
-    if isinstance(value, StrEnum): # Must be first to not recurse down into the enum class
-        return str(value)
+    if isinstance(value, Enum):  # Must be first to not recurse into enum internals.
+        return str(value.value)
 
     # Class
     if hasattr(value, "__dict__"):

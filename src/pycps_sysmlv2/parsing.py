@@ -82,7 +82,7 @@ def load_architecture(folder: Path | str) -> SysMLArchitecture:
 def load_system(folder: Path | str, system_part: str):
     a = load_architecture(folder)
     if system_part not in a.part_definitions:
-        raise Exception("Part not found")
+        raise KeyError(f"Part not found: {system_part}")
     return a.part_definitions[system_part]
 
 
@@ -262,6 +262,10 @@ def _attach_port_definitions(
     for part in parts.values():
         for port in part.ports.values():
             port.port_def = port_defs.get(port.port_name)
+            if port.port_def is None:
+                raise ValueError(
+                    f"Port definition not found for {part.name}.{port.name}: {port.port_name}"
+                )
 
 
 def _attach_part_definitions(parts: Dict[str, SysMLPartDefinition]) -> None:
@@ -270,25 +274,53 @@ def _attach_part_definitions(parts: Dict[str, SysMLPartDefinition]) -> None:
             subpart.part_def = parts.get(subpart.part_name)
 
 
-def _attach_connection_definitions(parts: Dict[str, SysMLPartDefinition], ports: Dict[str, SysMLPortDefinition]) -> None:
+def _attach_connection_definitions(
+    parts: Dict[str, SysMLPartDefinition], ports: Dict[str, SysMLPortDefinition]
+) -> None:
 
     for part in parts.values():
         for c in part.connections:
             if c.src_component not in part.parts:
-                raise Exception(f"Subpart not found for connection, {part.name}:{c.src_component}")
+                raise ValueError(
+                    f"Subpart not found for connection: {part.name}.{c.src_component}"
+                )
             if c.dst_component not in part.parts:
-                raise Exception(f"Subpart not found for connection, {part.name}:{c.dst_component}")
+                raise ValueError(
+                    f"Subpart not found for connection: {part.name}.{c.dst_component}"
+                )
 
             c.src_part_def = part.parts[c.src_component].part_def
             c.dst_part_def = part.parts[c.dst_component].part_def
+            if c.src_part_def is None:
+                raise ValueError(
+                    f"Part definition not found for subpart {part.name}.{c.src_component}"
+                )
+            if c.dst_part_def is None:
+                raise ValueError(
+                    f"Part definition not found for subpart {part.name}.{c.dst_component}"
+                )
 
             if c.src_port not in c.src_part_def.ports:
-                raise Exception(f"Port not found for connection, {c.src_part_def.name}:{c.src_port}")
+                raise ValueError(
+                    f"Port not found for connection: {c.src_part_def.name}.{c.src_port}"
+                )
             if c.dst_port not in c.dst_part_def.ports:
-                raise Exception(f"Port not found for connection, {c.dst_part_def.name}:{c.dst_port}")
+                raise ValueError(
+                    f"Port not found for connection: {c.dst_part_def.name}.{c.dst_port}"
+                )
 
             c.src_port_def = c.src_part_def.ports[c.src_port].port_def
             c.dst_port_def = c.dst_part_def.ports[c.dst_port].port_def
+            if c.src_port_def is None:
+                raise ValueError(
+                    f"Port definition not found for connection endpoint: "
+                    f"{c.src_part_def.name}.{c.src_port}"
+                )
+            if c.dst_port_def is None:
+                raise ValueError(
+                    f"Port definition not found for connection endpoint: "
+                    f"{c.dst_part_def.name}.{c.dst_port}"
+                )
 
 def _iter_block_items(block: str) -> Iterator[Tuple[str, str]]:
     lines = block.splitlines()
