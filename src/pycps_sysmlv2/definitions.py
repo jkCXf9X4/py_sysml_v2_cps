@@ -120,12 +120,11 @@ class SysMLAttribute:
     def is_list(self):
         return isinstance(self.value, (list, tuple))
 
-    def enumerator(self, start = 0):
+    def enumerator(self, start=0):
         v = self.value
         if not self.is_list():
             v = [v]
         return enumerate(v, start=start)
- 
 
     @staticmethod
     def from_literal(name, value: Optional[str], doc: Optional[str]):
@@ -257,9 +256,21 @@ class SysMLPortReference:
 @dataclass
 class SysMLArchitecture:
     package: str
-    part_definitions: Dict[str, SysMLPartDefinition]
-    port_definitions: Dict[str, SysMLPortDefinition]
-    requirements: List[SysMLRequirement]
+    # keep port definitions before part definitions to ensure correct json export order
+    port_definitions: Dict[str, SysMLPortDefinition] = field(default_factory=dict)
+    part_definitions: Dict[str, SysMLPartDefinition] = field(default_factory=dict)
+    requirements: List[SysMLRequirement] = field(default_factory=list)
 
     def __str__(self) -> str:
         return json_dumps(self)
+
+    def __post_init__(self):
+
+        # To ensure json export order
+        self.part_definitions = dict(
+            sorted(
+                self.part_definitions.items(),
+                key=lambda item: (len(item[1].parts), item[0]),
+                reverse=False,
+            )
+        )
